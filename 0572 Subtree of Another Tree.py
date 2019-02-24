@@ -19,3 +19,23 @@ class Solution:
 
 # Solution 2, we can pre-order traverse the tree, and remember null node as well,
 # then to check if string_t is a substring of string_s
+class Solution:
+    def dfs(self, node, path):
+        if node is None:
+            path.append('#')
+            return
+        path.append(str(node.val))
+        self.dfs(node.left, path)
+        self.dfs(node.right, path)
+        
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        path_s = ['']
+        path_t = ['']
+        
+        self.dfs(s, path_s)
+        self.dfs(t, path_t)
+        
+        s = ','.join(path_s)
+        t = ','.join(path_t)
+        
+        return t in s

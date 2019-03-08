@@ -1,3 +1,4 @@
+# Solution 1
 class Vector2D:
 
     def __init__(self, v: List[List[int]]):
@@ -21,6 +22,31 @@ class Vector2D:
         self.move_idx()
         return self.q_idx != len(self.q)
 
+# Solution 2
+from heapq import *
+
+class Vector2D:
+
+    def __init__(self, v: List[List[int]]):
+        self.v = v
+        self.q = []
+        
+        for i, c in enumerate(v):
+            if c:
+                heappush(self.q, [i, 0])
+        
+    def next(self) -> int:
+        i, idx = heappop(self.q)
+        res = self.v[i][idx]
+        
+        if idx + 1 < len(self.v[i]):
+            heappush(self.q, [i, idx + 1])
+        
+        return res
+        
+
+    def hasNext(self) -> bool:
+        return len(self.q) > 0
 
 # Your Vector2D object will be instantiated and called as such:
 # obj = Vector2D(v)

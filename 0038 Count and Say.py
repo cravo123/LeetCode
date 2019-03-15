@@ -1,3 +1,4 @@
+# Similar to Run Length Encoding
 class Solution:
     def count(self, q):
         res = []

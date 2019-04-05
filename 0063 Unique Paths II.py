@@ -56,6 +56,9 @@ class Solution:
             prev, curr = curr, prev
             
         return prev[0]
+# Similar follow up is from top left to bottom left, each step can be
+# down, down-left and down-right.
+
 
 # Follow-up 3, same as Follow-up 2, but with one more constraint. There is a lower 
 # bound H, find all paths that touch or go through lower bound.

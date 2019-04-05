@@ -70,6 +70,10 @@ class Solution:
         return res
 
 # Solution 3, BFS, breadth first search
+# Actually there is a gotcha as to when to add points to seen set
+# Most of the time, we want to avoid adding duplicate points to queue,
+# so as soon as we add a point to a queue, we should add it to the seen,
+# otherwise, we may add duplicate points to the queue
 class Solution:
     def numEnclaves(self, A: List[List[int]]) -> int:
         m, n = len(A), len(A[0]) if A else 0

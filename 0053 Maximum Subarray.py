@@ -18,6 +18,7 @@ class Solution:
 
 # Solution 2, DP
 # dp[i] means maximum subarray sum ending with i
+# LC 0121 Buy and Sell stock can be solved by this algorithm also.
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         n = len(nums)

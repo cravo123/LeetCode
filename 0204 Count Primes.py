@@ -3,7 +3,7 @@ class Solution:
         dp = [True for _ in range(max(n, 3))]
         dp[0] = dp[1] = False
         
-        for i in range(2, int(n ** 0.5) + 1):
+        for i in range(2, int(n ** 0.5) + 1): # no need to go through n, sqrt(n) is enough
             if dp[i]:
                 c = i + i
                 while c < n:

@@ -17,3 +17,15 @@ class Solution:
                 return False
             
             curr_min, curr_max = curr_max + 1, next_max
+
+# Solution 2, same idea but more elegant solution
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        i = right = 0
+        n = len(nums)
+        
+        while i < n and i <= right:
+            right = max(right, i + nums[i])
+            i += 1
+        
+        return right >= n - 1

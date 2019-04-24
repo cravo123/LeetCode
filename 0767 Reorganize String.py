@@ -1,4 +1,7 @@
 import collections
+import heapq
+# Similar as LC 0621
+
 # Solution 1,
 # Assume most common value is c and its frequency is v, then we have,
 # c__c__c...__c
@@ -36,3 +39,38 @@ class Solution(object):
         return res
 
 # Solution 2, priority queue solution, more elegant
+class Solution(object):
+    def reorganizeString(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        d = collections.Counter(S)
+        
+        q = [[-v, c] for c, v in d.items()]
+        
+        heapq.heapify(q)
+        res = []
+        while len(q) > 1:
+            v1, c1 = heapq.heappop(q)
+            v2, c2 = heapq.heappop(q)
+            
+            res.append(c1)
+            res.append(c2)
+            
+            v1 += 1
+            v2 += 1
+            
+            if v1 != 0:
+                heapq.heappush(q, [v1, c1])
+            if v2 != 0:    
+                heapq.heappush(q, [v2, c2])
+        
+        if len(q) == 1 and q[0][0] < -1:
+            return ''
+        if len(q) == 1:
+            res.append(q[0][1])
+        
+        res = ''.join(res)
+        
+        return res

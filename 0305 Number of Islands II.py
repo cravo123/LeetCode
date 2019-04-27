@@ -51,3 +51,57 @@ class Solution:
 
 # Solution 2, Union-Find elegant solution
 # Notice that in Solution 1, Union-Find logic could be extracted as a separate class
+class UFS:
+    def __init__(self):
+        self.d = {} # pos -> idx
+        self.parents = {} # idx -> parent
+        self.ranks = {}
+        self.idx = 0
+        self.cnt = 0
+        
+    def add_point(self, x, y):
+        if (x, y) not in self.d:
+            self.d[x, y] = self.idx
+            self.parents[self.idx] = self.idx
+            self.ranks[self.idx] = 1
+            self.idx += 1
+            self.cnt += 1
+            
+    def find_parent(self, x, y):
+        i = self.d[x, y]
+        v_i = i
+        while v_i != self.parents[v_i]:
+            self.parents[v_i] = self.parents[self.parents[v_i]]
+            v_i = self.parents[v_i]
+        self.parents[i] = v_i
+        
+        return v_i
+        
+    def union(self, i, j, x, y):
+        p1 = self.find_parent(i, j)
+        p2 = self.find_parent(x, y)
+        
+        if p1 != p2:
+            if self.ranks[p1] < self.ranks[p2]:
+                p1, p2 = p2, p1
+            self.parents[p2] = p1
+            self.ranks[p1] += self.ranks[p2]
+            self.cnt -= 1
+    
+    def union_neighbor(self, i, j):
+        for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+            x, y = i + di, j + dj
+            if (x, y) in self.d:
+                self.union(i, j, x, y)
+    
+class Solution:
+    def numIslands2(self, m: int, n: int, positions: List[List[int]]) -> List[int]:
+        uf = UFS()
+        
+        res = []
+        for i, j in positions:
+            uf.add_point(i, j)
+            uf.union_neighbor(i, j)
+            res.append(uf.cnt)
+        
+        return res

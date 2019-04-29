@@ -35,7 +35,70 @@ class Solution:
                     res = max(res, sum([dp[i][j].left, dp[i][j].right, dp[i][j].up, dp[i][j].down]))
         return res
 
-# Solution 2, DP, O(n) memory
+# Solution 1.1, DP, better O(m * n) memory
+class Solution:
+    def maxKilledEnemies(self, grid: List[List[str]]) -> int:
+        m, n = len(grid), len(grid[0]) if grid else 0
+        
+        dp = [[[0, 0] for _ in range(n)] for _ in range(m)]
+        
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 'W':
+                    continue
+                cnt = grid[i][j] == 'E'
+                dp[i][j][0] = cnt + (dp[i - 1][j][0] if i > 0 else 0)
+                dp[i][j][1] = cnt + (dp[i][j - 1][1] if j > 0 else 0)
+        
+        res = 0
+        
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                if grid[i][j] == 'W':
+                    dp[i][j] = [0, 0]
+                    continue
+                dp[i][j][0] = max(dp[i][j][0], dp[i + 1][j][0] if i < m - 1 else 0)
+                dp[i][j][1] = max(dp[i][j][1], dp[i][j + 1][1] if j < n - 1 else 0)
+                
+                if grid[i][j] == '0':
+                    res = max(res, sum(dp[i][j]))
+        return res
+
+# Solution 2, O(n) memory
+class Solution:
+    def row_kill(self, i, j, grid, m, n):
+        cnt = 0
+        k = j
+        while k < n and grid[i][k] != 'W':
+            if grid[i][k] == 'E':
+                cnt += 1
+            k += 1
+        return cnt
+    
+    def col_kill(self, i, j, grid, m, n):
+        cnt = 0
+        k = i
+        while k < m and grid[k][j] != 'W':
+            if grid[k][j] == 'E':
+                cnt += 1
+            k += 1
+        return cnt
+        
+    def maxKilledEnemies(self, grid: List[List[str]]) -> int:
+        m, n = len(grid), len(grid[0]) if grid else 0
+        
+        cols = [0 for _ in range(n)]
+        res = 0
+        
+        for i in range(m):
+            for j in range(n):
+                if j == 0 or grid[i][j - 1] == 'W':
+                    rk = self.row_kill(i, j, grid, m, n)
+                if i == 0 or grid[i - 1][j] == 'W':
+                    cols[j] = self.col_kill(i, j, grid, m, n)
+                if grid[i][j] == '0':
+                    res = max(res, rk + cols[j])
+        return res
 
 # Solution 3, Brute-Force
 class Solution:

@@ -17,4 +17,23 @@ class Solution:
             return 2
         if N == 3:
             return 6
-        return N * (N - 1) // (N - 2) + self.dfs(N - 3) 
+        return N * (N - 1) // (N - 2) + self.dfs(N - 3)
+
+# Solution 2, induction
+# notice that i * (i - 1) // (i - 2) == i + 1 for i >= 5
+class Solution:
+    def clumsy(self, N: int) -> int:
+        if N <= 2:
+            return N
+        if N == 3:
+            return 6
+        if N == 4:
+            return 7
+        
+        v = N % 4
+        
+        if v == 0:
+            return N + 1
+        if v in [1, 2]:
+            return N + 2
+        return N - 1

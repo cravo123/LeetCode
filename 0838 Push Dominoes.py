@@ -2,8 +2,32 @@
 
 import collections
 
-# Solution 1, 
-
+# Solution 1, adjacent symbols
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        dominoes = list(dominoes)
+        symbols = [[i, c] for i, c in enumerate(dominoes) if c != '.']
+        symbols = [[-1, 'L']] + symbols + [[len(dominoes), 'R']]
+        
+        for (i, c1), (j, c2) in zip(symbols, symbols[1:]):
+            if c1 == c2:
+                for k in range(i + 1, j):
+                    dominoes[k] = c1
+            elif c1 == 'L' and c2 == 'R':
+                continue
+            else:
+                left, right = i + 1, j - 1
+                
+                while left <= right:
+                    if left == right:
+                        left += 1
+                        right -= 1
+                    else:
+                        dominoes[left] = c1
+                        dominoes[right] = c2
+                        left += 1
+                        right -= 1
+        return ''.join(dominoes)
 
 
 # Solution 2, BFS simulation

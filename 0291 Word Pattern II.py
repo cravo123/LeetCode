@@ -30,3 +30,10 @@ class Solution:
             seen.discard(word)
             del d[pattern[i]]
         return False
+        
+        
+    def wordPatternMatch(self, pattern: str, S: str) -> bool:
+        dc = {} # char -> word
+        seen = set()
+        
+        return self.dfs(0, 0, pattern, S, dc, seen)

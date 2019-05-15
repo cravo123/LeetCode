@@ -24,6 +24,11 @@ class Solution:
             seen.add(word)
             d[pattern[i]] = word
             if self.dfs(i + 1, j + length, pattern, s, d, seen):
+                # If all we care is final result of True or False
+                # We can omit the following back-tracking steps
+                # If we need to generate all the "paths" along,
+                # i.e. the function will not "return" here,
+                # Then we do need back-tracking steps!
                 seen.discard(word)
                 del d[pattern[i]]
                 return True

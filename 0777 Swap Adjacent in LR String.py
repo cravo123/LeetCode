@@ -1,3 +1,13 @@
+# Solution 1, similar idea as Solution 2
+# Only check 
+class Solution:
+    def canTransform(self, start: str, end: str) -> bool:
+        s = [i for i, c in enumerate(start) if c != 'X']
+        e = [i for i, c in enumerate(end) if c != 'X']
+        
+        return (len(s) == len(e) and 
+            all(start[i] == end[j] and (i >= j if start[i] == 'L' else i <= j) 
+                for i, j in zip(s, e)))
 
 # Solution 2, observation
 # 'L' can only move left and 'R' can only move right

@@ -1,6 +1,65 @@
 import collections, string
 
-# Solution 1, complex 
+# Solution 1, BFS and cache previous node
+# This problem actually requires BFS/DFS knowledge and also back-tracking
+# when generating the paths
+class Solution:
+    def word_list(self, word, wordList):
+        q = set()
+        for i in range(len(word)):
+            for c in string.ascii_lowercase:
+                if c == word[i]:
+                    continue
+                tmp_word = word[:i] + c + word[(i + 1):]
+                if tmp_word in wordList:
+                    q.add(tmp_word)
+        return q
+    
+    def dfs(self, curr_word, target, prev, path, res):
+        if curr_word == target:
+            res.append([curr_word] + path[::-1])
+            return
+        
+        path.append(curr_word)
+        for new_word in prev[curr_word]:
+            self.dfs(new_word, target, prev, path, res)
+        path.pop()
+    
+    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
+        wordList = set(wordList)
+        if endWord not in wordList:
+            return []
+        
+        prev = collections.defaultdict(set)
+        
+        curr = set([beginWord])
+        
+        while curr:
+            tmp = set()
+            
+            if endWord in curr:
+                break
+            
+            for word in curr:
+                for new_word in self.word_list(word, wordList):
+                    tmp.add(new_word)
+                    prev[new_word].add(word)
+            
+            curr = tmp
+            wordList -= curr
+        
+        if endWord not in prev:
+            return []
+        
+        path = []
+        res = []
+        self.dfs(endWord, beginWord, prev, path, res)
+        
+        return res
+    
+        
+
+# Solution 2, complex 
 class Solution:
     def change(self, word):
         for i in range(len(word)):

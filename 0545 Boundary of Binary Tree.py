@@ -50,8 +50,8 @@ class Solution:
         if root is None:
             return res
     
-    # Solution 2, elegant recursion
-    class Solution:
+# Solution 2, elegant recursion
+class Solution:
     def dfs(self, node, is_left, is_right, res):
         if node is None:
             return

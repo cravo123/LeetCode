@@ -1,2 +1,5 @@
 # LeetCode
-Leet Code solution for different tags. The solution is ranked by acceptance rate.
+Comprehensive solutions to LeetCode problems.
+Trying to list multiple typical solutions to each problem.
+
+<b>Please star this repository if you find it helpful!</b>

@@ -17,4 +17,7 @@ class Solution:
                 for j in range(k - 1, i):
                     dp[i][k] = max(dp[i][k], dp[j][k - 1] + sum(A[j:i]) / (i - j))
         
-        return max(dp[-1])
+        return dp[-1][K]
+
+# Solution 1.1, DP with O(k) memory and cached prefix-sum
+# t.b.c

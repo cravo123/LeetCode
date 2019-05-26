@@ -1,9 +1,23 @@
-# Solution 1, similar to LC 0031 Next Permutation 
-# and LC 0556
-
+# Solution 1, greedy, more elegant
 class Solution:
     def maximumSwap(self, num: int) -> int:
-        d = {}
+        num = list(map(int, str(num)))
+        
+        d = {c:i for i, c in enumerate(num)}
+        
+        for i in range(len(num)):
+            for v in range(9, num[i], -1):
+                if v in d and d[v] > i:
+                    j = d[v]
+                    num[i], num[j] = num[j], num[i]
+                    return int(''.join(str(c) for c in num))
+        
+        return int(''.join(str(c) for c in num))
+
+# Solution 2, similar to LC 0031 Next Permutation 
+# and LC 0556
+class Solution:
+    def maximumSwap(self, num: int) -> int:
         num = list(str(num))
         n = len(num)
         

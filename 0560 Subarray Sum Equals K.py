@@ -1,6 +1,6 @@
 import collections
 
-# Prefix Sum
+# Solution 1, prefix-sum
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         d = collections.Counter()

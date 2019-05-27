@@ -50,6 +50,23 @@ class Solution:
         if root is None:
             return res
     
+        res.append(root.val)
+        if root.left is None and root.right is None:
+            return res
+        
+        q_l = self.left_bound(root.left)
+        res.extend(q_l)
+        
+        q = []
+        self.leaves(root, q)
+        res.extend(q)
+        
+        q_r = self.right_bound(root.right)
+        res.extend(q_r[::-1])
+        
+        return res
+
+
 # Solution 2, elegant recursion
 class Solution:
     def dfs(self, node, is_left, is_right, res):
@@ -79,21 +96,5 @@ class Solution:
         
         self.dfs(root.left, True, False, res)
         self.dfs(root.right, False, True, res)
-        
-        return res
-        
-        res.append(root.val)
-        if root.left is None and root.right is None:
-            return res
-        
-        q_l = self.left_bound(root.left)
-        res.extend(q_l)
-        
-        q = []
-        self.leaves(root, q)
-        res.extend(q)
-        
-        q_r = self.right_bound(root.right)
-        res.extend(q_r[::-1])
         
         return res

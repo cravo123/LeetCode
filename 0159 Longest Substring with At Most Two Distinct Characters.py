@@ -1,4 +1,6 @@
 import collections
+
+# Solution 1, sliding-window
 class Solution:
     def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
         d = collections.Counter()

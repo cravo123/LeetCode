@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, level, res):
         if node is None:
@@ -27,7 +27,7 @@ class Solution:
         
         return res
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def zigzagLevelOrder(self, root: 'TreeNode') -> 'List[List[int]]':
         res = []

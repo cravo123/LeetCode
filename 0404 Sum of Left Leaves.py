@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node):
         if node is None:
@@ -20,7 +20,7 @@ class Solution:
     def sumOfLeftLeaves(self, root: 'TreeNode') -> 'int':
         return self.dfs(root)
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def sumOfLeftLeaves(self, root: 'TreeNode') -> 'int':
         res = 0

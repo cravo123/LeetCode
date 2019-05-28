@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node):
         if node is None:
@@ -21,7 +21,9 @@ class Solution:
     def minDepth(self, root: 'TreeNode') -> 'int':
         return self.dfs(root)
 
-# Iteration
+# Solution 2, iteration
+# if we do level traversal, and find a node which has no children, 
+# then it represents the minimum height
 class Solution:
     def minDepth(self, root: 'TreeNode') -> 'int':
         level = 0

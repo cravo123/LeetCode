@@ -1,3 +1,5 @@
+# Solution 1, DFS
+# First gather indices for each island and standardize indices
 class Solution:
     def dfs(self, i, j, A, m, n, path):
         path.append([i, j])

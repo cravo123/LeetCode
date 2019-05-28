@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, level, res):
         if node is None:
@@ -14,6 +14,8 @@ class Solution:
         if level >= len(res):
             res.append([])
         
+        # both in-order and pre-order work
+        # as long as we traversal left child before right child
         self.dfs(node.left, level + 1, res)
         res[level].append(node.val)
         self.dfs(node.right, level + 1, res)
@@ -25,7 +27,7 @@ class Solution:
         
         return res[::-1]
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def levelOrderBottom(self, root: 'TreeNode') -> 'List[List[int]]':
         res = []

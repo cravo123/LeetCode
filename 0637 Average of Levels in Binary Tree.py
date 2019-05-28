@@ -8,7 +8,7 @@
 # Same idea as plain level traversal of binary tree, we just need
 # to post-process res to get level average values
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, level, res):
         if node is None:
@@ -31,7 +31,7 @@ class Solution:
         return res
 
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def averageOfLevels(self, root: 'TreeNode') -> 'List[float]':
         res = []
@@ -43,6 +43,22 @@ class Solution:
         while q:
             tmp = [p.val for p in q]
             res.append(sum(tmp) / len(tmp))
+            
+            q = [x for p in q for x in [p.left, p.right] if x]
+        
+        return res
+
+# Solution 2.1, more elegant implementation
+class Solution:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        res = []
+        if root is None:
+            return res
+        
+        q = [root]
+        
+        while q:
+            res.append(sum(p.val for p in q) / len(q))
             
             q = [x for p in q for x in [p.left, p.right] if x]
         

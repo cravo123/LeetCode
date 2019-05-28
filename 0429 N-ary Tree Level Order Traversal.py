@@ -5,8 +5,9 @@ class Node:
         self.val = val
         self.children = children
 """
+import collections
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, level, res):
         if node is None:
@@ -26,7 +27,7 @@ class Solution:
         return res
 
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def levelOrder(self, root: 'Node') -> 'List[List[int]]':
         res = []
@@ -40,5 +41,28 @@ class Solution:
             res.append([p.val for p in q])
             
             q = [x for p in q for x in p.children]
+        
+        return res
+
+# Solution 2.1, iteration using deque
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        res = []
+        
+        if root is None:
+            return res
+        
+        q = collections.deque()
+        q.append([root, 0])
+        
+        while q:
+            p, h = q.popleft()
+            if h == len(res):
+                res.append([])
+            res[h].append(p.val)
+            
+            h += 1
+            for x in p.children:
+                q.append([x, h])
         
         return res

@@ -5,19 +5,20 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Similar to LC 0559 Maximum Depth of N-ary Tree
+# Solution 1, recursion
 class Solution:
-    def dfs(self, node):
-        if node is None:
+    def maxDepth(self, root: TreeNode) -> int:
+        if root is None:
             return 0
         
-        return 1 + max(self.dfs(node.left), self.dfs(node.right))
-        
-        
-    def maxDepth(self, root: 'TreeNode') -> 'int':
-        return self.dfs(root)
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
-# Iteration
+# Solution 2, iteration
+# Any type of traversal would work, 
+# pre-order, in-order, post-order and level traversal
+
+# Solution 2.1, level traversal
 class Solution:
     def maxDepth(self, root: 'TreeNode') -> 'int':
         level = 0
@@ -32,3 +33,24 @@ class Solution:
             q = [x for p in q for x in [p.left, p.right] if x]
         
         return level
+
+# Solution 2.2, pre-order traversal
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        res = 0
+        if root is None:
+            return res
+        
+        q = [[root, 1]]
+        
+        while q:
+            p, h = q.pop()
+            res = max(res, h)
+            
+            h += 1
+            if p.right:
+                q.append([p.right, h])
+            if p.left:
+                q.append([p.left, h])
+        
+        return res

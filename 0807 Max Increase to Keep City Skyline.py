@@ -1,3 +1,6 @@
+# Solution 1, cache row_max and col_max
+# Note zip(*matrix) is a shortcut for transposing matrix
+
 class Solution:
     def maxIncreaseKeepingSkyline(self, grid: 'List[List[int]]') -> 'int':
         rows = [max(row) for row in grid]

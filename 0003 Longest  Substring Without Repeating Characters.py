@@ -1,6 +1,6 @@
 import collections
 
-# Solution 1, use dict to cache recurrence.
+# Solution 1, use dict to cache recurrence, sliding-window
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         d = collections.Counter()

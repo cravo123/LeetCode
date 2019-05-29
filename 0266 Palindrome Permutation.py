@@ -1,5 +1,6 @@
 import collections
 
+# Solution 1, count occurrence
 class Solution:
     def canPermutePalindrome(self, s: str) -> bool:
         if not s:

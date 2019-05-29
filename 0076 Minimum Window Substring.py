@@ -1,6 +1,6 @@
-# Sliding window
 import collections
 
+# Solution 1, sliding-window
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         res = ''

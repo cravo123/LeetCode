@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, val):
         if node is None or node.val == val:
@@ -17,7 +17,7 @@ class Solution:
     def searchBST(self, root: 'TreeNode', val: 'int') -> 'TreeNode':
         return self.dfs(root, val)
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def searchBST(self, root: 'TreeNode', val: 'int') -> 'TreeNode':
         curr = root

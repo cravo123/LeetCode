@@ -14,7 +14,13 @@ class Solution(object):
             q.append((ord(c) - base + 26) % 26)
         
         q = tuple(q)
+        
         return q
+    # or 1-line
+    def normalize(self, s):
+        q = [(ord(c) - ord(s[0]) + 26) % 26 for c in s]
+        
+        return tuple(q)
         
     def groupStrings(self, strings):
         """

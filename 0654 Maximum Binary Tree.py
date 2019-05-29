@@ -5,14 +5,14 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, nums, left, right):
         if left > right:
             return
         
         max_val = max(nums[left:(right + 1)])
-        max_idx = nums[left:(right + 1)].index(max_val) + left
+        max_idx = nums.index(max_val, left)
         
         root = TreeNode(max_val)
         root.left = self.dfs(nums, left, max_idx - 1)
@@ -27,7 +27,7 @@ class Solution:
         res = self.dfs(nums, 0 , len(nums) - 1)
         return res
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def constructMaximumBinaryTree(self, nums: 'List[int]') -> 'TreeNode':
         q = []

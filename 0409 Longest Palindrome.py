@@ -1,4 +1,6 @@
 import collections
+
+# Solution 1, count occurrence
 class Solution:
     def longestPalindrome(self, s: str) -> int:
         if not s:

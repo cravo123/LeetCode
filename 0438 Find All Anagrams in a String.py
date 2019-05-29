@@ -21,26 +21,25 @@ class Solution:
 # Solution 2, sliding-window
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        target = collections.Counter(p)
+        d = collections.Counter(p)
+        need = len(p)
         curr = collections.Counter()
-        cnt = 0
-        
         res = []
-        n = len(p)
-        
+        j = 0
         for i, c in enumerate(s):
-            if c in target:
-                curr[c] += 1
-                if curr[c] <= target[c]:
-                    cnt += 1
+            curr[c] += 1
             
-            prev = i - n + 1
-            if prev >= 0 and cnt == n:
-                res.append(i - n + 1)
+            if curr[c] <= d[c]:
+                need -= 1
             
-            if prev >= 0 and s[prev] in target:
-                curr[s[prev]] -= 1
-                if 0 <= curr[s[prev]] < target[s[prev]]:
-                    cnt -= 1
-           
+            if i - j + 1 > len(p):
+                v = s[j]
+                curr[v] -= 1
+                if curr[v] < d[v]:
+                    need += 1
+                j += 1
+            
+            if need == 0:
+                res.append(j)
+        
         return res

@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, val):
         if node is None:
@@ -19,7 +19,8 @@ class Solution:
     def insertIntoBST(self, root: 'TreeNode', val: 'int') -> 'TreeNode':
         return self.dfs(root, val)
 
-class Solution_Iteration:
+# Solution 2, iteration
+class Solution:
     def insertIntoBST(self, root: 'TreeNode', val: 'int') -> 'TreeNode':
         new_node = TreeNode(val)
         if root is None:

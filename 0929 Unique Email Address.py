@@ -1,3 +1,5 @@
+# Solution 1, simulation
+
 class Solution:
     def change(self, name):
         idx = name.find('+')

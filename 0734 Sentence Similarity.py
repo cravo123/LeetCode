@@ -6,14 +6,11 @@ class Solution:
         if len(words1) != len(words2):
             return False
         
-        n = len(words1)
-        
         d = collections.defaultdict(set)
         
         for w1, w2 in pairs:
             d[w1].add(w2)
             d[w2].add(w1)
-        
         
         for w1, w2 in zip(words1, words2):
             if w1 == w2 or w2 in d[w1] or w1 in d[w2]:

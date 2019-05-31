@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, low, high):
         if node is None:
@@ -19,7 +19,47 @@ class Solution:
     def rangeSumBST(self, root: 'TreeNode', L: 'int', R: 'int') -> 'int':
         return self.dfs(root, L, R)
 
-# Iteration
+# Solution 1, recursion using global variable
+class Solution:
+    def dfs(self, node, L, R):
+        if node is None:
+            return
+        
+        if L <= node.val <= R:
+            self.res += node.val
+        
+        if node.val > L:
+            self.dfs(node.left, L, R)
+        if node.val < R:
+            self.dfs(node.right, L, R)  
+        
+    def rangeSumBST(self, root: TreeNode, L: int, R: int) -> int:
+        self.res = 0
+        self.dfs(root, L, R)
+        
+        return self.res
+
+# Solution 3, recursion without global variable
+class Solution:
+    def dfs(self, node, L, R):
+        if node is None:
+            return 0
+        res = 0
+        if L <= node.val <= R:
+            res += node.val
+        
+        if node.val > L:
+            res += self.dfs(node.left, L, R)
+        if node.val < R:
+            res += self.dfs(node.right, L, R)
+        
+        return res
+        
+    def rangeSumBST(self, root: TreeNode, L: int, R: int) -> int:
+        
+        return self.dfs(root, L, R)
+
+# Solution 2, iteration
 class Solution:
     def rangeSumBST(self, root: 'TreeNode', L: 'int', R: 'int') -> 'int':
         res = 0

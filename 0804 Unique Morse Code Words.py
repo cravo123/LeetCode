@@ -1,18 +1,15 @@
-class Solution(object):
-    def uniqueMorseRepresentations(self, words):
-        """
-        :type words: List[str]
-        :rtype: int
-        """
-        idx = [".-","-...","-.-.","-..",".","..-.",
-                "--.","....","..",".---","-.-",".-..",
-                "--","-.","---",".--.","--.-",".-.",
-                "...","-","..-","...-",".--","-..-","-.--","--.."]
+# Solution 1, hash set
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        d = [".-","-...","-.-.","-..",".",
+             "..-.","--.","....","..",".---",
+             "-.-",".-..","--","-.","---",".--.",
+             "--.-",".-.","...","-","..-","...-",
+             ".--","-..-","-.--","--.."]
         
         res = set()
         
         for word in words:
-            tmp = ''.join(idx[ord(c) - ord('a')] for c in word)
-            res.add(tmp)
+            res.add(''.join(d[ord(c) - ord('a')] for c in word))
         
         return len(res)

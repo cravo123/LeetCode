@@ -1,5 +1,6 @@
 import collections
 
+# Solution 1, hash table
 class Solution:
     def findPairs(self, nums: List[int], k: int) -> int:
         if not nums or k < 0:

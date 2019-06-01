@@ -1,9 +1,14 @@
 import collections
+
+# Solution 1, simulation
+# simulate index,
+# idx points to the sorted deck value we want to fill in final result
+# q stores index candidates, and simulate revealing card process
 class Solution:
     def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
         deck.sort()
         n = len(deck)
-        q = collections.deque([i for i in range(n)])
+        q = collections.deque(range(n))
         
         res = [0 for _ in deck]
         idx = 0

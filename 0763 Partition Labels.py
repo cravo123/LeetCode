@@ -1,13 +1,17 @@
+# Solution 1, two-pointer
+
 class Solution:
     def partitionLabels(self, S: str) -> List[int]:
         d = {c:i for i, c in enumerate(S)}
+        
+        curr = 0
         res = []
-        curr = float('-inf')
-        cnt = 0
+        prev = -1
+        
         for i, c in enumerate(S):
             curr = max(curr, d[c])
-            cnt += 1
             if curr == i:
-                res.append(cnt)
-                cnt = 0
+                res.append(i - prev)
+                prev = i
+        
         return res

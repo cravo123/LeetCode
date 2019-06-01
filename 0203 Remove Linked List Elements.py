@@ -4,13 +4,14 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, create dummy head
 class Solution:
     def removeElements(self, head: ListNode, val: int) -> ListNode:
         dummy = curr = ListNode(0)
         curr.next = head
         
-        while curr:
-            if curr.next and curr.next.val == val:
+        while curr.next:
+            if curr.next.val == val:
                 curr.next = curr.next.next
             else:
                 curr = curr.next

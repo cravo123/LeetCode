@@ -1,14 +1,12 @@
 # Solution 1, change in place
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        i, n = 0, len(nums)
         j = 0
         
-        while i < n:
-            if nums[i] != val:
-                nums[j] = nums[i]
+        for c in nums:
+            if c != val:
+                nums[j] = c
                 j += 1
-            i += 1
         return j
 
 # Solution 2, similar to quick select

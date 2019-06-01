@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         if not nums:

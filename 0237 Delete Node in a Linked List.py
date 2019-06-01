@@ -4,6 +4,8 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, more like brain-teaser
+# copy next node's val and point "next" pointer to the next next node
 class Solution:
     def deleteNode(self, node):
         """

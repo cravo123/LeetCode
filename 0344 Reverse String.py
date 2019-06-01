@@ -1,8 +1,8 @@
-class Solution(object):
-    def reverseString(self, s):
+# Solution 1, two-pointer
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
         """
-        :type s: List[str]
-        :rtype: void Do not return anything, modify s in-place instead.
+        Do not return anything, modify s in-place instead.
         """
         i, j = 0, len(s) - 1
         

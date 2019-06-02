@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def generatePossibleNextMoves(self, s: str) -> List[str]:
         s = list(s)

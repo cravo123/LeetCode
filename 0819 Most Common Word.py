@@ -1,4 +1,6 @@
 import collections
+
+# Solution 1, simulation
 class Solution:
     def parse(self, s):
         res = []

@@ -1,5 +1,6 @@
 import collections
 
+# Solution 1, use deque to maintain a list of values under consideration
 class MovingAverage:
 
     def __init__(self, size: int):

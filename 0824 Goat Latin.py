@@ -1,14 +1,19 @@
+# Solution 1, simulation
 class Solution:
-    def change(self, word):
+    def change(self, word, idx):
         if word[0].lower() in 'aeiou':
             res = word
         else:
             res = word[1:] + word[0]
-        return res + 'ma'
         
-    def toGoatLatin(self, S: 'str') -> 'str':
-        S = S.split()
+        res = res + 'ma' + 'a' * idx
         
-        res = [self.change(word) + 'a' * (i + 1) for i, word in enumerate(S)]
-        #res = [self.change(word) + 'a' * i for i, word in enumerate(S, 1)]
-        return ' '.join(res)
+        return res
+        
+    def toGoatLatin(self, S: str) -> str:
+        
+        words = S.split()
+        
+        res = ' '.join(self.change(word, i + 1) for i, word in enumerate(words))
+        
+        return res

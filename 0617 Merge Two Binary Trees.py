@@ -5,22 +5,20 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
-    def dfs(self, node1, node2):
-        if node1 is None:
-            return node2
-        if node2 is None:
-            return node1
-        node1.val += node2.val
-        node1.left, node1.right = self.dfs(node1.left, node2.left), self.dfs(node1.right, node2.right)
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+        if t1 is None:
+            return t2
+        if t2 is None:
+            return t1
+        t1.val += t2.val
+        t1.left = self.mergeTrees(t1.left, t2.left)
+        t1.right = self.mergeTrees(t1.right, t2.right)
         
-        return node1
-        
-    def mergeTrees(self, t1: 'TreeNode', t2: 'TreeNode') -> 'TreeNode':
-        return self.dfs(t1, t2)
+        return t1
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def mergeTrees(self, t1: 'TreeNode', t2: 'TreeNode') -> 'TreeNode':
         q = [t1, t2]

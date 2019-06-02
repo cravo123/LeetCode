@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def transpose(self, A: 'List[List[int]]') -> 'List[List[int]]':
         m, n = len(A), len(A[0]) if A else 0
@@ -10,7 +11,7 @@ class Solution:
         
         return res
 
-# Python 1-line
+# Solution 1.1, Python 1-line
 class Solution:
     def transpose(self, A: 'List[List[int]]') -> 'List[List[int]]':
         return list(zip(*A))

@@ -6,7 +6,7 @@ class Node:
         self.children = children
 """
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, res):
         if node is None:
@@ -20,7 +20,7 @@ class Solution:
         self.dfs(root, res)
         return res
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def preorder(self, root: 'Node') -> 'List[int]':
         res = []

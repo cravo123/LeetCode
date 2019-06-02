@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, target):
         if node is None:
@@ -20,14 +20,7 @@ class Solution:
         
         return self.dfs(root, root.val)
 
-# Iteration
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
+# Solution 2, iteration
 class Solution:
     def isUnivalTree(self, root: 'TreeNode') -> 'bool':
         if root is None:

@@ -1,4 +1,6 @@
 from collections import Counter
+
+# Solution 1, hash table
 class Solution:
     def findLonelyPixel(self, picture: 'List[List[str]]') -> 'int':
         rows, cols = Counter(), Counter()

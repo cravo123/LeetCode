@@ -1,11 +1,6 @@
-# Solution 1, moving backward
+# Solution 1, moving backward, suffix sum
 class Solution(object):
-    def shiftingLetters(self, S, shifts):
-        """
-        :type S: str
-        :type shifts: List[int]
-        :rtype: str
-        """
+    def shiftingLetters(self, S: str, shifts: List[int]) -> str:
         S = list(S)
         
         n = len(S)

@@ -1,45 +1,45 @@
-# With memorization
+# Solution 1, typical DFS 
+# Without memorization
 class Solution:
-    def dfs(self, curr, target, path, res, graph):
-        if curr == target:
-            res.append(path + [target])
-            return 
-        path.append(curr)
+    def dfs(self, idx, path, res, graph):
+        path.append(idx)
         
-        for neighbor in graph[curr]:
-            self.dfs(neighbor, target, path, res, graph)
+        if idx == len(graph) - 1:
+            res.append(path[::])
+        else:
+            for j in graph[idx]:
+                self.dfs(j, path, res, graph)
+        
         path.pop()
         
-    def allPathsSourceTarget(self, graph: 'List[List[int]]') -> 'List[List[int]]':
-        res = []
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         path = []
+        res = []
         
-        n = len(graph)
-        
-        self.dfs(0, n - 1, path, res, graph)
+        self.dfs(0, path, res, graph)
         
         return res
 
-# Solution 2, with memorization
+# Solution 2, DFS with memorization
 class Solution:
-    def dfs(self, curr, target, graph, d):
-        if curr in d:
-            return d[curr]
-        if curr == target:
-            return [[target]]
+    def dfs(self, idx, graph, d):
+        if idx in d:
+            return d[idx]
         
         res = []
+        if idx == len(graph) - 1:
+            res.append([idx])
+        else:
+            for j in graph[idx]:
+                for next_path in self.dfs(j, graph, d):
+                    res.append([idx] + next_path)
         
-        for neighbor in graph[curr]:
-            for path in self.dfs(neighbor, target, graph, d):
-                res.append([curr] + path)
-        d[curr] = res
+        d[idx] = res
         
         return res
         
-    def allPathsSourceTarget(self, graph: 'List[List[int]]') -> 'List[List[int]]':
+        
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         d = {}
         
-        self.dfs(0, len(graph) - 1, graph, d)
-        
-        return d[0]
+        return self.dfs(0, graph, d)

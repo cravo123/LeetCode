@@ -1,3 +1,4 @@
+# Solution 1, stack
 class Solution:
     def isValid(self, s: str) -> bool:
         d = {

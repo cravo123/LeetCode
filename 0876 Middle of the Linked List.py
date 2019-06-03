@@ -4,7 +4,8 @@
 #         self.val = x
 #         self.next = None
 
-# fast and slow pointer
+# Solution 1, fast and slow pointer
+# This trick is one of the few algorithms in linked list problems
 class Solution:
     def middleNode(self, head: 'ListNode') -> 'ListNode':
         slow = fast = head
@@ -14,7 +15,7 @@ class Solution:
             fast = fast.next.next
         return slow
 
-# First get length, then traverse to half
+# Solution 2, first get length, then traverse to half
 class Solution:
     def length(self, head):
         n = 0

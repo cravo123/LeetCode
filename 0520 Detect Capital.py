@@ -1,10 +1,8 @@
-# Solution 1
+# Solution 1, built-in function
 class Solution:
     def detectCapitalUse(self, word: str) -> bool:
-        if word in (word.upper(), word.lower(), word.capitalize()):
-            return True
-        return False
-
+        return word in (word.upper(), word.lower(), word.capitalize())
+         
 # Solution 2
 class Solution:
     def detectCapitalUse(self, word):

@@ -1,4 +1,4 @@
-# Solution 1, O(N)
+# Solution 1, O(N), linear scan
 class Solution:
     def peakIndexInMountainArray(self, A: 'List[int]') -> 'int':
         i, j = 0, len(A) - 1

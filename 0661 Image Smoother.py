@@ -1,16 +1,23 @@
+# Solution 1, simulation
 class Solution:
-    def imageSmoother(self, A: 'List[List[int]]') -> 'List[List[int]]':
-        m, n = len(A), len(A[0]) if A else 0
+    def average(self, i, j, M, m, n):
+        cnt = curr = 0
         
-        res = [row[::] for row in A]
+        for di in [-1, 0, 1]:
+            for dj in [-1, 0, 1]:
+                x, y = i + di, j + dj
+                if 0 <= x < m and 0 <= y < n:
+                    cnt += 1
+                    curr += M[x][y]
+        return curr // cnt
+        
+    def imageSmoother(self, M: List[List[int]]) -> List[List[int]]:
+        m, n = len(M), len(M[0]) if M else 0
+        
+        res = [[0 for _ in range(n)] for _ in range(m)]
         
         for i in range(m):
             for j in range(n):
-                tmp = []
-                for di in [-1, 0, 1]:
-                    for dj in [-1, 0, 1]:
-                        x, y = i + di, j + dj
-                        if 0 <= x < m and 0 <= y < n:
-                            tmp.append(A[x][y])
-                res[i][j] = sum(tmp) // len(tmp)
+                res[i][j] = self.average(i, j, M, m, n)
+        
         return res

@@ -1,21 +1,15 @@
-class Solution(object):
-    def findContentChildren(self, g, s):
-        """
-        :type g: List[int]
-        :type s: List[int]
-        :rtype: int
-        """
+# Solution 1, greedy
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
         g.sort()
         s.sort()
         
-        res = 0
+        i, m = 0, len(g)
         
-        m, n = len(g), len(s)
-        i = j = 0
-        
-        while i < m and j < n:
-            if g[i] <= s[j]:
-                res += 1
+        for c in s:
+            if i == m:
+                break
+            if g[i] <= c:
                 i += 1
-            j += 1
-        return res
+        
+        return i

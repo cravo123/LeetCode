@@ -1,3 +1,4 @@
+# Solution 1, stack
 # Longest Increasing Subsequence(LIS) idea
 # the stack maintains an invariant of decreasing subsequence
 class Solution:

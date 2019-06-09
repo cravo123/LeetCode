@@ -6,10 +6,13 @@
 #         self.right = None
 
 # Solution 1, recursion. In-order traversal, and add leaf node to res
+# Actually, it doesn't need to be in-order traversal. As long as we traverse
+# the tree in the same order for both trees, then we are fine.
 class Solution:
     def dfs(self, node, res):
         if node is None:
             return
+        
         if node.left is None and node.right is None:
             res.append(node.val)
             return

@@ -1,21 +1,19 @@
-class Solution(object):
-    def findRelativeRanks(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[str]
-        """
-        scores = [[c, i] for i, c in enumerate(nums)]
-        scores.sort(reverse=True)
+# Solution 1, simulation
+class Solution:
+    def findRelativeRanks(self, nums: List[int]) -> List[str]:
+        tmp = [[c, i] for i, c in enumerate(nums)]
+        tmp.sort(reverse=True)
         
-        scores = {v[0]:str(i + 1) for i, v in enumerate(scores)}
+        res = nums[::]
         
-        res = [scores[x] for x in nums]
+        for i, (_, idx) in enumerate(tmp):
+            if i > 2:
+                res[idx] = str(i + 1)
+            elif i == 2:
+                res[idx] = 'Bronze Medal'
+            elif i == 1:
+                res[idx] = 'Silver Medal'
+            else:
+                res[idx] = 'Gold Medal'
         
-        for i in range(len(res)):
-            if res[i] == '1':
-                res[i] = 'Gold Medal'
-            elif res[i] == '2':
-                res[i] = 'Silver Medal'
-            elif res[i] == '3':
-                res[i] = 'Bronze Medal'
         return res

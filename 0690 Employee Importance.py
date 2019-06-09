@@ -10,6 +10,8 @@ class Employee:
         # the id of direct subordinates
         self.subordinates = subordinates
 """
+
+# Solution 1, DFS
 class Solution:
     def dfs(self, idx, d):
         res = d[idx][0]

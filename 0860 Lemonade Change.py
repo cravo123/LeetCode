@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def lemonadeChange(self, bills: 'List[int]') -> 'bool':
         fives = tens = 0

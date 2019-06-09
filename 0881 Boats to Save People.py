@@ -1,3 +1,5 @@
+# Solution 1, greedy
+# We need to prove that greedy is correct.
 class Solution:
     def numRescueBoats(self, people: 'List[int]', limit: 'int') -> 'int':
         people.sort()

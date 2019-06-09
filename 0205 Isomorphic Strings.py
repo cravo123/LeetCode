@@ -1,4 +1,6 @@
-# Solution 1
+# Solution 1, use hashmap and hashset
+# hashmap maintains the mapping, 
+# and hashset caches all chars we have used till so far
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
         if len(s) != len(t):
@@ -15,19 +17,17 @@ class Solution:
             seen.add(b)
         return True
  
- # Solution 2
- class Solution:
-    def change(self, s):
+ # Solution 2, standardize the each string by occurrence
+class Solution:
+    def standardize(self, s):
         d = {}
         
         res = []
         for c in s:
             res.append(d.setdefault(c, len(d)))
         
-        res = ','.join(str(x) for x in res)
-        
         return res
         
     def isIsomorphic(self, s: str, t: str) -> bool:
         
-        return self.change(s) == self.change(t)
+        return self.standardize(s) == self.standardize(t)

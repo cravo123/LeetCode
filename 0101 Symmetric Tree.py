@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, Recursion
 class Solution:
     def dfs(self, p, q):
         if p is None or q is None:
@@ -17,7 +17,7 @@ class Solution:
             return True
         return self.dfs(root.left, root.right)
 
-# Iteration
+# Solution 2, Iteration
 class Solution:
     def isSymmetric(self, root: 'TreeNode') -> 'bool':
         if root is None:
@@ -38,4 +38,20 @@ class Solution:
             q.append(R.right)
             q.append(L.right)
             q.append(R.left)
+        return True
+
+# Solution 2.1, iteration using queue
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        q = [root]
+        
+        while q:
+            t = [p.val if p else '#' for p in q]
+            if t != t[::-1]:
+                return False
+            
+            # remove none
+            q = [p for p in q if p]
+            q = [x for p in q for x in [p.left, p.right]]
+        
         return True

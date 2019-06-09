@@ -4,35 +4,34 @@
 #         self.val = x
 #         self.next = None
 
-# Iteration
+# Solution 1, iteration
 class Solution:
-    def reverseList(self, head: 'ListNode') -> 'ListNode':
-        pre, curr = None, head
+    def reverseList(self, head: ListNode) -> ListNode:
+        prev, curr = None, head
         
         while curr:
             p = curr.next
-            curr.next = pre
-            pre = curr
-            curr = p
-        return pre
+            curr.next = prev
+            prev, curr = curr, p
+        
+        return prev
 
-# Recursion
+# Solution 2, recursion
 class Solution:
-    def reverse_helper(self, node):
-        if node is None:
-            return None, None
+    def reverse_help(self, node):
+        if node is None or node.next is None:
+            return node, node # tail, head
         
-        if node.next is None:
-            return node, node
-        
-        tail, head = self.reverse_helper(node.next)
+        tail, head = self.reverse_help(node.next)
         tail.next = node
         node.next = None
         
         return node, head
         
-    def reverseList(self, head: 'ListNode') -> 'ListNode':
+    def reverseList(self, head: ListNode) -> ListNode:
+        _, res = self.reverse_help(head)
         
-        tail, head = self.reverse_helper(head)
-        
-        return head
+        return res
+
+# Solution 2.1, recursion
+# Actually we only need to return one node, head 

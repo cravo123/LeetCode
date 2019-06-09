@@ -1,3 +1,5 @@
+# Solution 1, back-tracking
+# Template problem
 class Solution:
     def dfs(self, path, res, seen, nums):
         if len(path) == len(nums):

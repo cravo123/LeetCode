@@ -1,6 +1,7 @@
 import collections
 
 # Solution 1, DFS
+# First build a tree(graph), then DFS traverse
 class Solution:
     def dfs(self, pid, d, res):
         res.append(pid)

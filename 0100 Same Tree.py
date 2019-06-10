@@ -5,7 +5,8 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, Recursion
+# Similar to LC 0101 Symmetric Tree
 class Solution:
     def dfs(self, p, q):
         if p is None or q is None:
@@ -16,7 +17,7 @@ class Solution:
     def isSameTree(self, p: 'TreeNode', q: 'TreeNode') -> 'bool':
         return self.dfs(p, q)
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def isSameTree(self, p: 'TreeNode', q: 'TreeNode') -> 'bool':
         curr = [[p, q]]

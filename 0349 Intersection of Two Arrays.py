@@ -1,6 +1,15 @@
 import collections
 
-# Solution 1, dict + set
+# Solution 1, set + set
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        res = set(nums1) & set(nums2)
+        
+        res = list(res)
+        
+        return res
+
+# Solution 2, dict + set
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
         if len(nums1) > len(nums2):
@@ -17,16 +26,7 @@ class Solution:
         
         return res
 
-# Solution 2, set + set
-class Solution:
-    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        res = set(nums1) & set(nums2)
-        
-        res = list(res)
-        
-        return res
-
-# Solution 3, Sort + 2 Pointers
+# Solution 3, Sort + 2-Pointer
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
         nums1.sort()

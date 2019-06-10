@@ -1,12 +1,11 @@
-class Solution(object):
-    def validMountainArray(self, A):
-        """
-        :type A: List[int]
-        :rtype: bool
-        """
-        if len(A) < 3:
-            return False
+# Solution 1, simulation, two-pointer
+# move pointer from both end and check it they meet in the middle
+class Solution:
+    def validMountainArray(self, A: List[int]) -> bool:
         n = len(A)
+        if n < 3:
+            return False
+        
         i = 0
         while i < n - 1 and A[i] < A[i + 1]:
             i += 1

@@ -20,7 +20,6 @@ class Codec:
         
         return self.long_2_short[longUrl]
         
-
     def decode(self, shortUrl):
         """Decodes a shortened URL to its original URL.
         
@@ -33,7 +32,8 @@ class Codec:
     candidates = string.ascii_letters + string.digits
     long_2_short = {}
     short_2_long = {}
-    
+    size = 6
+
     def encode(self, longUrl):
         """Encodes a URL to a shortened URL.
         
@@ -42,7 +42,7 @@ class Codec:
         """
         if longUrl not in self.long_2_short:
             while True:
-                tmp_str = itertools.permutations(self.candidates, 6)
+                tmp_str = itertools.permutations(self.candidates, self.size)
                 if tmp_str not in self.short_2_long:
                     self.short_2_long[tmp_str] = longUrl
                     self.long_2_short[longUrl] = tmp_str

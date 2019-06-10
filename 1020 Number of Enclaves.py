@@ -1,41 +1,99 @@
 import collections
-# Solution 1, best-first-search
-# Notice that we use a set as a "bag" here to collect points to be iterated
-# We can use deque as well, but it may get TLE
+
+# Solution 1, BFS, breadth first search
+# Actually there is a gotcha as to when to add points to seen set
+# Most of the time, we want to avoid adding duplicate points to queue,
+# so as soon as we add a point to a queue, we should add it to the seen,
+# otherwise, we may add duplicate points to the queue
 class Solution:
+    def bfs(self, q, seen, A, m, n):        
+        while q:
+            i, j = q.popleft()
+            A[i][j] = 0
+            for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+                x, y = i + di, j + dj
+                if 0 <= x < m and 0 <= y < n and A[x][y] == 1 and (x, y) not in seen:
+                    q.append([x, y])
+                    seen.add((x, y))
+
     def numEnclaves(self, A: List[List[int]]) -> int:
         m, n = len(A), len(A[0]) if A else 0
         
-        q = set()
+        q = collections.deque()
+        seen = set()
+        for i in range(m):
+            for j in [0, n - 1]:
+                if A[i][j] == 1:
+                    q.append([i, j])
+                    seen.add((i, j))
+                    
+        for j in range(1, n - 1):
+            for i in [0, m - 1]:
+                if A[i][j] == 1:
+                    q.append([i, j])
+                    seen.add((i, j))
         
-        for j in range(n):
-            if A[0][j] == 1:
-                q.add((0, j))
-            if A[m - 1][j] == 1:
-                q.add((m - 1, j))
-        
-        for i in range(1, m - 1):
-            if A[i][0] == 1:
-                q.add((i, 0))
-            if A[i][n - 1] == 1:
-                q.add((i, n - 1))
-        
-        while q:
-            i, j = q.pop()
-            A[i][j] = 0
-            
-            for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
-                x, y = i + di, j + dj
-                if 0 <= x < m and 0 <= y < n and A[x][y] == 1:
-                    q.add((x, y))
+        self.bfs(q, seen, A, m, n)
         
         res = 0
-        for i in range(m):
-            for j in range(n):
+        for i in range(1, m - 1):
+            for j in range(1, n - 1):
                 if A[i][j] == 1:
                     res += 1
         
         return res
+
+# Solution 1.1, mark matrix entry to be 0 when adding to queue, so that we don't need a "seen" set any more
+class Solution:
+    def collect_points(self, A, m, n):
+        q = collections.deque()
+        
+        for i in range(m):
+            for j in [0, n - 1]:
+                if A[i][j] == 1:
+                    q.append([i, j])
+                    A[i][j] = 0
+        
+        for j in range(n):
+            for i in [0, m - 1]:
+                if A[i][j] == 1:
+                    q.append([i, j])
+                    A[i][j] = 0
+        
+        return q
+    
+    def bfs(self, q, A, m, n):
+        while q:
+            i, j = q.popleft()
+            
+            for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+                x, y = i + di, j + dj
+                if 0 <= x < m and 0 <= y < n and A[x][y] == 1:
+                    A[x][y] = 0
+                    q.append([x, y])
+    
+    def count_ones(self, A, m, n):
+        cnt = 0
+        
+        for i in range(m):
+            for j in range(n):
+                if A[i][j] == 1:
+                    cnt += 1
+        
+        return cnt
+    
+    def numEnclaves(self, A: List[List[int]]) -> int:
+        m, n = len(A), len(A[0]) if A else 0
+        
+        # collection boundary entries where values are 1
+        q = self.collect_points(A, m, n)
+        
+        self.bfs(q, A, m, n)
+        
+        res = self.count_ones(A, m, n)
+        
+        return res
+
 
 # Solution 2, DFS
 class Solution:
@@ -60,52 +118,6 @@ class Solution:
                 self.dfs(i, 0, A, m, n)
             if A[i][n - 1] == 1:
                 self.dfs(i, n - 1, A, m, n)
-        
-        res = 0
-        for i in range(m):
-            for j in range(n):
-                if A[i][j] == 1:
-                    res += 1
-        
-        return res
-
-# Solution 3, BFS, breadth first search
-# Actually there is a gotcha as to when to add points to seen set
-# Most of the time, we want to avoid adding duplicate points to queue,
-# so as soon as we add a point to a queue, we should add it to the seen,
-# otherwise, we may add duplicate points to the queue
-class Solution:
-    def numEnclaves(self, A: List[List[int]]) -> int:
-        m, n = len(A), len(A[0]) if A else 0
-        
-        q = collections.deque()
-        seen = set()
-        
-        for j in range(n):
-            if A[0][j] == 1 and (0, j) not in seen:
-                q.append([0, j])
-                seen.add((0, j))
-            if A[m - 1][j] == 1 and (m - 1, j) not in seen:
-                q.append([m - 1, j])
-                seen.add((m - 1, j))
-        
-        for i in range(1, m - 1):
-            if A[i][0] == 1 and (i, 0) not in seen:
-                q.append([i, 0])
-                seen.add((i, 0))
-            if A[i][n - 1] == 1 and (i, n - 1) not in seen:
-                q.append([i, n - 1])
-                seen.add((i, n - 1))
-        
-        while q:
-            i, j = q.popleft()
-            A[i][j] = 0
-            
-            for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
-                x, y = i + di, j + dj
-                if 0 <= x < m and 0 <= y < n and A[x][y] == 1 and (x, y) not in seen:
-                    q.append([x, y])
-                    seen.add((x, y))
         
         res = 0
         for i in range(m):

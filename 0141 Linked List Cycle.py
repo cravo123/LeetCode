@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, fast-slow pointers
 class Solution(object):
     def hasCycle(self, head):
         """

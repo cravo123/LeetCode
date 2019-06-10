@@ -1,3 +1,4 @@
+# Solution 1, 
 class Solution:
     def isPalindrome(self, x: int) -> bool:
         if x < 0:
@@ -17,4 +18,20 @@ class Solution:
             x %= multi
             x //= 10
             multi //= 100
+        return True
+
+# Solution 2, convert to string
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0:
+            return False
+        x = str(x)
+        i, j = 0, len(x) - 1
+        
+        while i < j:
+            if x[i] != x[j]:
+                return False
+            i += 1
+            j -= 1
+        
         return True

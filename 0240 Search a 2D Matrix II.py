@@ -1,3 +1,6 @@
+# Solution 1, saddle search
+# Similar to a binary search tree if you rotate matrix 
+# 45 degree anti-clockwise.
 class Solution:
     def searchMatrix(self, matrix, target):
         """

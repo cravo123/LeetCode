@@ -5,7 +5,8 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, Recursion
+# res[level] records all index position for each level
 class Solution:
     def dfs(self, node, size, level, res):
         if node is None:
@@ -16,9 +17,7 @@ class Solution:
         
         self.dfs(node.left, size * 2, level + 1, res)
         res[level].append(size)
-        self.dfs(node.right, size * 2 + 1, level + 1, res)
-        
-        
+        self.dfs(node.right, size * 2 + 1, level + 1, res)      
         
     def widthOfBinaryTree(self, root: 'TreeNode') -> 'int':
         if root is None:
@@ -32,7 +31,7 @@ class Solution:
         res = [row[-1] - row[0] + 1 for row in res]
         return max(res)
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def widthOfBinaryTree(self, root: 'TreeNode') -> 'int':
         res = 0

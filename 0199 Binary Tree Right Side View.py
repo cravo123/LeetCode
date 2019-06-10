@@ -5,7 +5,8 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
+# DFS, visit right node first, so we can get rightmost node first
 class Solution:
     def dfs(self, node, level, res):
         if node is None:
@@ -22,7 +23,8 @@ class Solution:
         
         return res
 
-# Iteration
+# Solution 2, iteration
+# BFS Level traversal
 class Solution:
     def rightSideView(self, root: 'TreeNode') -> 'List[int]':
         res = []

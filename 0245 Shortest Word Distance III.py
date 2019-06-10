@@ -1,3 +1,4 @@
+# Solution 1, two-pointer
 class Solution:
     def shortestWordDistance(self, words: List[str], word1: str, word2: str) -> int:
         res = float('inf')
@@ -16,4 +17,28 @@ class Solution:
                 i2 = i  
             res = min(res, abs(i1 - i2))
 
+        return res
+
+# Solution 1.1, a different implementation
+class Solution:
+    def shortestWordDistance(self, words: List[str], word1: str, word2: str) -> int:
+        is_same = word1 == word2
+        i1 = i2 = float('-inf')
+        res = float('inf')
+        
+        for i, word in enumerate(words):
+            if word not in [word1, word2]:
+                continue
+            
+            if is_same and word == word1:
+                i1, i2 = i2, i
+                res = min(res, i2 - i1)
+                continue
+            
+            if word == word1:
+                i1 = i
+            if word == word2:
+                i2 = i
+            res = min(res, abs(i2 - i1))
+        
         return res

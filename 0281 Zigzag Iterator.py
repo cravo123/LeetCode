@@ -28,7 +28,43 @@ class ZigzagIterator(object):
         :rtype: bool
         """
         return len(self.q) > 0
+
+# Solution 1.1, similar idea, but using iterator is more elegant
+# The reason why we add length counter is that there is not easy way to
+# determine if an iterator is exhausted or not without using next().
+# On the other hand, if we use next(), then we have already consume iterator.
+class ZigzagIterator(object):
+
+    def __init__(self, v1, v2):
+        """
+        Initialize your data structure here.
+        :type v1: List[int]
+        :type v2: List[int]
+        """
+        self.q = collections.deque()
         
+        for v in [v1, v2]:
+            if v:
+                self.q.append([iter(v), len(v)])
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        it, cnt = self.q.popleft()
+        res = next(it)
+        cnt -= 1
+        if cnt > 0:
+            self.q.append([it, cnt])
+        
+        return res
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        return len(self.q) > 0
+
 # Solution 2, indexing-bases, error-prone
 class ZigzagIterator(object):
 
@@ -38,29 +74,31 @@ class ZigzagIterator(object):
         :type v1: List[int]
         :type v2: List[int]
         """
-        self.v = [v1, v2]
-        self.row = 0
-        self.cols = [0, 0]        
-
+        self.q = collections.deque()
+        self.vs = [v1, v2]
+        self.ls = [len(v1), len(v2)]
+        
+        if len(v1) > 0:
+            self.q.append([0, 0])
+        if len(v2) > 0:
+            self.q.append([0, 1])
+        
     def next(self):
         """
         :rtype: int
         """
-        if self.cols[self.row] == len(self.v[self.row]):
-            self.row = 1 - self.row
-        
-        res = self.v[self.row][self.cols[self.row]]
-        self.cols[self.row] += 1
-        self.row = 1 - self.row
-        
+        i, idx = self.q.popleft()
+        res = self.vs[idx][i]
+        i += 1
+        if i < self.ls[idx]:
+            self.q.append([i, idx])
         return res
-        
 
     def hasNext(self):
         """
         :rtype: bool
         """
-        return self.cols[0] < len(self.v[0]) or self.cols[1] < len(self.v[1])
+        return len(self.q) > 0
 
 # Your ZigzagIterator object will be instantiated and called as such:
 # i, v = ZigzagIterator(v1, v2), []

@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, simulation using hashmap
 class Solution:
     def numComponents(self, head: ListNode, G: List[int]) -> int:
         d = set(G)

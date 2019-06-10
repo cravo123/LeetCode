@@ -1,12 +1,8 @@
 import collections
-class Solution(object):
-    def checkRecord(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+
+# Solution 1, simulation
+class Solution:
+    def checkRecord(self, s: str) -> bool:
         d = collections.Counter(s)
         
-        if d['A'] > 1 or 'LLL' in s:
-            return False
-        return True
+        return 'LLL' not in s and d['A'] < 2

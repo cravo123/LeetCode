@@ -1,14 +1,16 @@
+import collections
+
 # Solution 1, Sorting
 class Solution:
-    def frequencySort(self, s: 'str') -> 'str':
-        s = list(s)
-        
+    def frequencySort(self, s: str) -> str:
         d = collections.Counter(s)
+        q = [[-cnt, c] for c, cnt in d.items()]
+        q.sort()
         
-        s.sort(key=lambda c: [-d[c], c])
-        s = ''.join(s)
+        res = ''.join([c * (-cnt) for cnt, c in q])
         
-        return s
+        return res
+
 # Solution 2, Bucket Sorting
 class Solution:
     def frequencySort(self, s: 'str') -> 'str':
@@ -25,4 +27,5 @@ class Solution:
             for c in bucket[i]:
                 res.append(c * i)
         res = ''.join(res)
+        
         return res

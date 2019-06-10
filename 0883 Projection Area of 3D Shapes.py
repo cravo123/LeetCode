@@ -1,13 +1,13 @@
+# Solution 1, simulation
 class Solution:
     def projectionArea(self, grid: List[List[int]]) -> int:
-        rows = [max(row) for row in grid]
-        cols = [max(col) for col in zip(*grid)]
+        if len(grid) == 0 or len(grid[0]) == 0:
+            return 0
         
-        area = 0
-        for row in grid:
-            for v in row:
-                area += 1 if v > 0 else 0
+        xy = sum(sum(1 if c else 0 for c in row) for row in grid)
+        xz = sum(max(row) for row in grid)
+        yz = sum(max(col) for col in zip(*grid))
         
-        area += sum(rows) + sum(cols)
+        res = xy + xz + yz
         
-        return area
+        return res

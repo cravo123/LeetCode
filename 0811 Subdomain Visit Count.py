@@ -1,22 +1,21 @@
 import collections
 
+# Solution 1, simulation, hashmap
 class Solution:
-    def add(self, name, d):
-        cnt, name = name.split()
-        
+    def add(self, address, d):
+        num, name = address.split()
+        num = int(num)
         name = name.split('.')
-        cnt = int(cnt)
         
-        n = len(name)
-        for i in range(n):
-            d[tuple(name[i:])] += cnt
+        for i in range(len(name)):
+            d[tuple(name[i:])] += num
         
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
         d = collections.Counter()
         
-        for name in cpdomains:
-            self.add(name, d)
+        for address in cpdomains:
+            self.add(address, d)
         
-        res = ['%d %s' % (cnt, '.'.join(key)) for key, cnt in d.items()]
+        res = ['%d %s' % (cnt, '.'.join(name)) for name, cnt in d.items()]
         
         return res

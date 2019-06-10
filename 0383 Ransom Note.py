@@ -1,4 +1,6 @@
 import collections
+
+# Solution 1, simulation using Counter
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         d = collections.Counter(magazine)

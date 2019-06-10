@@ -15,6 +15,16 @@ class Solution:
         
         return res == tmp
 
+# Solution 1.1, customized sorting
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+        d = {c:i for i, c in enumerate(order)}
+        
+        words_tmp = words[::]
+        words_tmp.sort(key=lambda x: [d[c] for c in x])
+        
+        return words_tmp == words
+
 # Solution 2, there is no need to sort words actually.
 # we can just check if words[i] <= words[i + 1] for all i
 class Solution:

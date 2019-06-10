@@ -1,3 +1,5 @@
+# Solution 1, simulation
+# Check if word can be spelled by one line in keyboard
 class Solution:
     def findWords(self, words: 'List[str]') -> 'List[str]':
         line1, line2, line3 = (set('qwertyuiop'), set('asdfghjkl'), set('zxcvbnm'))

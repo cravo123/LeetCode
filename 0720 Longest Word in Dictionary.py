@@ -1,6 +1,6 @@
 import string
 
-# Solution 1, elegant solution 
+# Solution 1, sort
 class Solution:
     def longestWord(self, words: List[str]) -> str:
         res = []
@@ -23,6 +23,23 @@ class Solution:
                 seen.add(word)
         
         return res[0]
+
+# Solution 2, elegant implementation, we can directly use plain sort...
+# So it will sort like
+# 'a', 'ab', 'abc', 'b'
+class Solution:
+    def longestWord(self, words: List[str]) -> str:
+        res = ''
+        seen = set([''])
+        
+        words.sort()
+        
+        for word in words:
+            if word[:-1] in seen:
+                res = word if len(word) > len(res) else res
+                seen.add(word)
+        
+        return res
 
 # Solution 2, BFS
 class Solution:

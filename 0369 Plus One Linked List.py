@@ -38,23 +38,27 @@ class Solution:
         return res
 
 # Solution 2, find the last non-9 node, and add
+# first point to the node where it is the last node whose value is not 9
 class Solution:
     def plusOne(self, head: ListNode) -> ListNode:
-        dummy = p = q = ListNode(0)
+        dummy = first = ListNode(0)
         dummy.next = head
         
-        while p.next:
-            if p.next.val != 9:
-                q = p.next
-            p = p.next
+        curr = dummy
+        while curr.next:
+            if curr.next.val != 9:
+                first = curr.next
+            curr = curr.next
         
-        if p.val != 9:
-            p.val += 1
-            return dummy.next
-        else:
-            q.val += 1
-            q = q.next
-            while q:
-                q.val = 0
-                q = q.next
-            return dummy if dummy.val > 0 else dummy.next
+        if curr.val != 9:
+            curr.val += 1
+            return head
+        
+        first.val += 1
+        
+        first = first.next
+        while first:
+            first.val = 0
+            first = first.next
+        
+        return dummy.next if dummy.val == 0 else dummy

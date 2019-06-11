@@ -6,7 +6,7 @@
 #         self.right = None
 
 # Solution 1, similar to Solution 2, but with global var, 
-# although simple, it is not elegant
+# although simple, it is not elegant. Traverse Order: Right -> Curr -> Left
 class Solution:
     def dfs(self, node):
         if node is None:
@@ -24,7 +24,6 @@ class Solution:
         self.dfs(root)
         
         return root
-
 
 # Solution 2, similar to LC 530, minimum absolute difference in BST of returning prev
 class Solution:

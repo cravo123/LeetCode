@@ -30,6 +30,8 @@
 #        :rtype void
 #        """
 
+# Solution 1, back-tracking
+# This is a good question to test your understanding of back-tracking
 class Solution:
     def dfs(self, robot, i, j, di, dj, seen):
         robot.clean()
@@ -38,6 +40,7 @@ class Solution:
         for _ in range(4):
             if (i + di, j + dj) not in seen and robot.move():
                 self.dfs(robot, i + di, j + dj, di, dj, seen)
+                # back-tracking
                 robot.turnLeft()
                 robot.turnLeft()
                 robot.move()

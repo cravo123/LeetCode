@@ -6,67 +6,74 @@
 #         self.right = None
 
 # Solution 1, Recursion
+# Cache parent and level info
 class Solution:
-    def calc(self, node, target, level):
+    def dfs(self, node, level, d, x, y):
         if node is None:
-            return None, -1 # return parent node and level value
+            return
+        if node.left:
+            if node.left.val == x:
+                d[x] = [level + 1, node.val]
+            if node.left.val == y:
+                d[y] = [level + 1, node.val]
+        if node.right:
+            if node.right.val == x:
+                d[x] = [level + 1, node.val]
+            if node.right.val == y:
+                d[y] = [level + 1, node.val]
         
-        if node.left and node.left.val == target:
-            return node, level
-        
-        if node.right and node.right.val == target:
-            return node, level
+        # prune
+        if x in d and y in d:
+            return
         
         level += 1
-        L, R = self.calc(node.left, target, level), self.calc(node.right, target, level)
+        self.dfs(node.left, level, d, x, y)
+        self.dfs(node.right, level, d, x, y)
         
-        if L[0]:
-            return L
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        d = {}
         
-        if R[0]:
-            return R
+        # Add dummy, so no need to special handling root
+        dummy = TreeNode(None)
+        dummy.left = root
         
-        return None, -1
+        self.dfs(dummy, 0, d, x, y)
         
-    def isCousins(self, root: 'TreeNode', x: 'int', y: 'int') -> 'bool':
+        if x == y or x not in d or y not in d:
+            return False
         
-        first = self.calc(root, x, 0)
-        second = self.calc(root, y, 0)
+        if d[x][0] != d[y][0]:
+            return False
         
-        return first[0] != second[0] and first[1] == second[1] and first[1] != -1
+        if d[x][1] == d[y][1]:
+            return False
+        
+        return True
 
 # Solution 2, iterative
+# BFS, early termination if we see x or y
 class Solution:
     def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
-        if root is None or x == y:
+        if root is None:
             return False
         
         q = [root]
         
         while q:
-            x_seen = y_seen = False
+            curr_vals = [x.val for p in q for x in [p.left, p.right] if x]
             
-            tmp = []
+            is_x = x in curr_vals
+            is_y = y in curr_vals
             
-            for p in q:
-                if p.left and p.right:
-                    if set([p.left.val, p.right.val]) == set([x, y]):
-                        return False
-                if p.left:
-                    if p.left.val == x:
-                        x_seen = True
-                    elif p.left.val == y:
-                        y_seen = True
-                    tmp.append(p.left)
-                if p.right:
-                    if p.right.val == x:
-                        x_seen = True
-                    elif p.right.val == y:
-                        y_seen = True
-                    tmp.append(p.right)
-            
-            if x_seen and y_seen:
+            if is_x or is_y:
+                if not (is_x and is_y):
+                    return False
+                for p in q:
+                    if p.left and p.right:
+                        if set([p.left.val, p.right.val]) == set([x, y]):
+                            return False
                 return True
             
-            q = tmp
+            q = [x for p in q for x in [p.left, p.right] if x]
+        
         return False

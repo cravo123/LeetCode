@@ -1,3 +1,43 @@
+import collections
+
+# Solution 1, BFS using hashset
+class Solution:
+    def bfs(self, ocean, matrix, m, n):
+        q = collections.deque(ocean)
+        
+        while q:
+            i, j = q.popleft()
+            
+            for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+                x, y = i + di, j + dj
+                if 0 <= x < m and 0 <= y < n and matrix[x][y] >= matrix[i][j] and (x, y) not in ocean:
+                    ocean.add((x, y))
+                    q.append((x, y))
+        
+    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
+        m, n = len(matrix), len(matrix[0]) if matrix else 0
+        
+        pacific = set()
+        atlantic = set()
+        
+        for i in range(m):
+            pacific.add((i, 0))
+            atlantic.add((i, n - 1))
+        
+        for j in range(n):
+            pacific.add((0, j))
+            atlantic.add((m - 1, j))
+        
+        self.bfs(pacific, matrix, m, n)
+        self.bfs(atlantic, matrix, m, n)
+        
+        res = pacific & atlantic
+        
+        res = [[val[0], val[1]] for val in res]
+        
+        return res
+
+# Solution 2, create temp matrix to mark visited
 class Solution:
     def dfs(self, i, j, matrix, ocean, m, n):
         ocean[i][j] = True

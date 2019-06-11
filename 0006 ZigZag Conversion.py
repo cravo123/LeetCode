@@ -1,5 +1,8 @@
+# Solution 1, simulation
+
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
+        # corner case
         if numRows == 1:
             return s
         res = [[] for _ in range(numRows)] # [[]] * numRows

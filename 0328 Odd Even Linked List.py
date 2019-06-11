@@ -4,22 +4,27 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, simulation
+# Similar to LC 0086 Partition List
 class Solution:
     def oddEvenList(self, head: ListNode) -> ListNode:
-        odd = runner_1 = ListNode(0)
-        even = runner_2 = ListNode(0)
+        dummy1 = odd = ListNode(None)
+        dummy2 = even = ListNode(None)
         
         curr = head
+        idx = 1
         
         while curr:
-            runner_1.next = curr
-            runner_1 = runner_1.next
+            if idx == 1:
+                odd.next = curr
+                odd = odd.next
+            else:
+                even.next = curr
+                even = even.next
             curr = curr.next
-            if curr:
-                runner_2.next = curr
-                runner_2 = runner_2.next
-                curr = curr.next
-        runner_1.next = even.next
-        runner_2.next = None
+            idx = 1 - idx
         
-        return odd.next
+        odd.next = dummy2.next
+        even.next = None
+        
+        return dummy1.next

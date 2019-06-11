@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def count(self, tag, board):
         res = sum(row.count(tag) for row in board)
@@ -9,7 +10,7 @@ class Solution:
             return True
         
         # Vertical
-        if any(all(x == tag for x in col) for col in zip(*board)):
+        if any(all(row[j] == tag for row in board) for j in range(3)):
             return True
         
         # diagonal

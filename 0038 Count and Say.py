@@ -1,3 +1,4 @@
+# Solution 1, simulation
 # Similar to Run Length Encoding
 class Solution:
     def count(self, q):
@@ -19,7 +20,7 @@ class Solution:
     def countAndSay(self, n: int) -> str:
         q = [1]
         
-        for i in range(1, n):
+        for _ in range(1, n):
             q = self.count(q)
         
         res = ''.join(str(x) for x in q)

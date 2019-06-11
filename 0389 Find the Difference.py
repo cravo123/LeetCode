@@ -1,5 +1,6 @@
 import collections
-# Solution 1, dict
+
+# Solution 1, Counter
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
         d = collections.Counter(s)
@@ -9,7 +10,7 @@ class Solution:
             if d[c] < 0:
                 return c
 
-# Solution 2, XOR
+# Solution 2, XOR, more elegant and efficient!
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
         res = 0

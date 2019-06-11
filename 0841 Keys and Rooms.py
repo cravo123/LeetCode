@@ -1,3 +1,5 @@
+import collections
+
 # Solution 1, BFS
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
@@ -16,6 +18,25 @@ class Solution:
             q = tmp
         
         return len(rooms) == sum(seen)
+
+# Solution 1.1, BFS using deque
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        n = len(rooms)
+        
+        q = collections.deque(rooms[0])
+        seen = set(rooms[0])
+        seen.add(0)
+        
+        while q:
+            i = q.popleft()
+            
+            for j in rooms[i]:
+                if j not in seen:
+                    seen.add(j)
+                    q.append(j)
+        
+        return len(seen) == n
 
 # Solution 2, DFS, iterative
 class Solution:

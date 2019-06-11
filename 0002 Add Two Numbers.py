@@ -4,6 +4,8 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, simulation
+# This is a template question for Linked List
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         carry = 0

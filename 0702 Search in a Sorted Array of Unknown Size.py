@@ -1,3 +1,6 @@
+# Solution 1, binary search
+# First double search size if current val is smaller than target
+# Then when we break, we know our search range is (j // 2, j)
 class Solution:
     def search(self, reader, target):
         """
@@ -5,24 +8,21 @@ class Solution:
         :type target: int
         :rtype: int
         """
-        i = 1
+        j = 1
         
-        while True:
-            val = reader.get(i)
+        while reader.get(j) < target:
+            j *= 2
+        
+        i = j // 2
+        
+        while i < j:
+            m = (i + j) // 2
             
-            if val >= target:
-                break
-            i *= 2
-        
-        left, right = 0, i
-        
-        while left < right:
-            mid = (left + right) // 2
-            val = reader.get(mid)
+            v = reader.get(m)
             
-            if val < target:
-                left = mid + 1
+            if v < target:
+                i = m + 1
             else:
-                right = mid
+                j = m
         
-        return left if reader.get(left) == target else -1
+        return i if reader.get(i) == target else -1

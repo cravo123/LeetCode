@@ -5,17 +5,22 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, Recursion
 class Solution:
-    def dfs(self, node, low, high):
-        if node is None:
-            return
-        if node.val < low:
-            return self.dfs(node.right, low, high)
-        if node.val > high:
-            return self.dfs(node.left, low, high)
-        node.left, node.right = self.dfs(node.left, low, high), self.dfs(node.right, low, high)
-        return node
-    
-    def trimBST(self, root: 'TreeNode', L: 'int', R: 'int') -> 'TreeNode':
-        return self.dfs(root, L, R)
+    def trimBST(self, root: TreeNode, L: int, R: int) -> TreeNode:
+        if root is None:
+            return root
+        
+        if root.val < L:
+            return self.trimBST(root.right, L, R)
+        
+        if root.val > R:
+            return self.trimBST(root.left, L, R)
+        
+        root.left = self.trimBST(root.left, L, R)
+        root.right = self.trimBST(root.right, L, R)
+        
+        return root
+
+# Solution 2, Iteration
+# t.b.c

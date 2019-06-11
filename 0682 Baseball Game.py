@@ -1,3 +1,4 @@
+# Solution 1, stack
 class Solution:
     def calPoints(self, ops: 'List[str]') -> 'int':
         q = []

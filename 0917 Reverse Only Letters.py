@@ -1,3 +1,4 @@
+# Solution 1, two-pointer
 class Solution:
     def reverseOnlyLetters(self, S: 'str') -> 'str':
         S = list(S)
@@ -12,6 +13,24 @@ class Solution:
             
             if i < j:
                 S[i], S[j] = S[j], S[i]
-            i += 1
-            j -= 1
+                i += 1
+                j -= 1
         return ''.join(S)
+
+# Solution 2, stack
+# Interesting idea, but not as efficient as Solution 1
+class Solution:
+    def reverseOnlyLetters(self, S: str) -> str:
+        q = [c for c in S if c.isalpha()]
+        
+        res = []
+        
+        for c in S:
+            if c.isalpha():
+                res.append(q.pop())
+            else:
+                res.append(c)
+        
+        res = ''.join(res)
+        
+        return res

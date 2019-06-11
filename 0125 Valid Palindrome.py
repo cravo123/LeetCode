@@ -1,4 +1,5 @@
-# Two pointers
+# Solution 1, two-pointer
+# Similar to LC 0917 Reverse Only Letters,
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         i, j = 0, len(s) - 1

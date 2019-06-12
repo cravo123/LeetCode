@@ -1,3 +1,6 @@
+from functools import reduce
+import heapq
+
 # Solution 1, O(nlogn)
 # This is a sorting solution
 class Solution:
@@ -9,8 +12,6 @@ class Solution:
 # Solution 2,
 # Since we only need to cache 3 largest numbers, and two smallest numbers
 # heapq, or priority queue is a natural idea, O(nlog3) = O(n)
-from functools import reduce
-import heapq
 class Solution:
     def maximumProduct(self, nums: List[int]) -> int:
         largest = heapq.nlargest(3, nums)

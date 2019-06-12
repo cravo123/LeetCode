@@ -1,4 +1,5 @@
 import collections
+
 # Solution 1, Brute-Force, O(n^2)
 class Solution:
     def numPairsDivisibleBy60(self, time: List[int]) -> int:

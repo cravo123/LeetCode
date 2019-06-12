@@ -1,42 +1,32 @@
+# Solution 1, simulation
 class Solution:
     def largeGroupPositions(self, S: str) -> List[List[int]]:
         res = []
-        if not S:
-            return res
+        j, n = 0, len(S)
         
-        curr = S[0]
-        cnt = 0
         for i, c in enumerate(S):
-            if c == curr:
-                cnt += 1
-            else:
-                if cnt >= 3:
-                    res.append([i - cnt , i - 1])
-                cnt = 1
-                curr = c
-        
-        if cnt >= 3:
-            res.append([len(S) - cnt , len(S) - 1])
-        
+            if c != S[j]:
+                if i - j > 2:
+                    res.append([j, i - 1])
+                j = i
+        if n - j > 2:
+            res.append([j, n - 1])
+            
         return res
 
-# Solution 2, more precise control of iterator
+# Solution 1.1, if we want to get rid of duplicate "if i - j > 2" statement
+# we can use two while for better loop control
 class Solution:
     def largeGroupPositions(self, S: str) -> List[List[int]]:
-        res = []
-        if not S:
-            return res
-        
         i, n = 0, len(S)
+        res = []
         
         while i < n:
             j = i
-            cnt = 0
             while j < n and S[i] == S[j]:
-                cnt += 1
                 j += 1
             
-            if cnt >= 3:
+            if j - i > 2:
                 res.append([i, j - 1])
             i = j
         

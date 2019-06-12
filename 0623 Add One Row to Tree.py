@@ -7,24 +7,26 @@
 
 # BFS
 class Solution:
-    def addOneRow(self, root: 'TreeNode', v: 'int', d: 'int') -> 'TreeNode':
-        dummy = TreeNode(0)
+    def addOneRow(self, root: TreeNode, v: int, d: int) -> TreeNode:
+        dummy = TreeNode(None)
         dummy.left = root
         
-        idx = 0
-        curr = [dummy]
+        q = [dummy]
+        level = 1
         
-        while idx < d - 1:
-            curr = [x for p in curr for x in [p.left, p.right] if x]
-            idx += 1
-            
-        for p in curr:
-            q = TreeNode(v)
-            q.left = p.left
-            p.left = q
-            q = TreeNode(v)
-            q.right = p.right
-            p.right = q
+        while level < d:
+            q = [x for p in q for x in [p.left, p.right] if x]
+            level += 1
+        
+        for p in q:
+            tmp = TreeNode(v)
+            tmp.left = p.left
+            p.left = tmp
+
+            tmp = TreeNode(v)
+            tmp.right = p.right
+            p.right = tmp
+        
         return dummy.left
 
 # DFS

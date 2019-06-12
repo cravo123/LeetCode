@@ -5,6 +5,7 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, back-tracking
 class Solution:
     def dfs(self, node, path, res):
         if node is None:
@@ -19,7 +20,6 @@ class Solution:
         path.pop()
         
     def binaryTreePaths(self, root: TreeNode) -> List[str]:
-        
         res = []
         path = []
         

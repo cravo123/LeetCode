@@ -17,6 +17,26 @@ class Solution:
         
         return res
 
+# Solution 1.1, Lee215 solution, speechless...
+class Solution:
+    def removeOuterParentheses(self, S: str) -> str:
+        cnt = 0
+        res = []
+        
+        for c in S:
+            if c == '(' and cnt > 0:
+                res.append(c)
+            if c == ')' and cnt > 1:
+                res.append(c)
+            
+            if c == '(':
+                cnt += 1
+            else:
+                cnt -= 1
+        res = ''.join(res)
+        
+        return res
+
 # Solution 2, temp save
 class Solution:
     def removeOuterParentheses(self, S: str) -> str:

@@ -1,3 +1,18 @@
+# Solution 1, elegant simulation implementation
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        if not s:
+            return True
+        i, n = 0, len(s)
+        
+        for c in t:
+            if c == s[i]:
+                i += 1
+                if i == n:
+                    return True
+        return False
+
+# Solution 2, inter-twisted loop
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
         i = j = 0

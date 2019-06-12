@@ -1,7 +1,7 @@
 # Solution 1, back-tracking
 class Solution:
     def dfs(self, left, right, path, res, n):
-        if len(path) == 2 * n:
+        if left == right == n:
             res.append(''.join(path))
             return
         

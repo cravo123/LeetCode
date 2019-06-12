@@ -6,6 +6,7 @@
 #         self.right = None
 import collections
 
+# Solution 1, Recursion, DFS
 class Solution:
     def dfs(self, node, x, y, d):
         if node is None:
@@ -18,7 +19,7 @@ class Solution:
         
     def verticalTraversal(self, root: 'TreeNode') -> 'List[List[int]]':
         d = collections.defaultdict(dict)
-        
+        # collections.defaultdict(lambda: collections.defaultdict(list))
         self.dfs(root, 0, 0, d)
         
         res = []

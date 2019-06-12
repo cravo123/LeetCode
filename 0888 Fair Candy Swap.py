@@ -1,3 +1,5 @@
+# Solution 1, simulation
+# Use hash table to cache, similar to LC 0001 Two Sum
 class Solution:
     def fairCandySwap(self, A: List[int], B: List[int]) -> List[int]:
         need = (sum(A) + sum(B)) // 2

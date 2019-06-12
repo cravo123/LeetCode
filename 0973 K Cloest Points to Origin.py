@@ -21,6 +21,7 @@ class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
         res = nsmallest(K, points, key=lambda x: x[0] * x[0] + x[1] * x[1])
         return res
+
 # Solution 3, quick select
 class Solution:
     def dist(self, p):
@@ -52,3 +53,12 @@ class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
         self.quick_select(points, 0, len(points) - 1, K - 1)
         return points[:K]
+
+# Solution 4, sort
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        points.sort(key=lambda x: x[0] * x[0] + x[1] * x[1])
+        
+        res = points[:K]
+        
+        return res

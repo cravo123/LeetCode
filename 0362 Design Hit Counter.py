@@ -1,3 +1,5 @@
+# Solution 1, use a list of length 300 to cache hit history
+# Similar to LC 0933 Number of Recent Calls
 class HitCounter:
 
     def __init__(self):
@@ -31,6 +33,35 @@ class HitCounter:
         
         return res
 
+# Solution 2, vanilla deque 
+class HitCounter:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.q = collections.deque()
+        self.size = 300
+        
+    def _clean(self, timestamp):
+        while self.q and self.q[0] + self.size <= timestamp:
+            self.q.popleft()
+
+    def hit(self, timestamp: int) -> None:
+        """
+        Record a hit.
+        @param timestamp - The current timestamp (in seconds granularity).
+        """
+        self.q.append(timestamp)
+
+    def getHits(self, timestamp: int) -> int:
+        """
+        Return the number of hits in the past 5 minutes.
+        @param timestamp - The current timestamp (in seconds granularity).
+        """
+        self._clean(timestamp)
+        
+        return len(self.q)
 
 # Your HitCounter object will be instantiated and called as such:
 # obj = HitCounter()

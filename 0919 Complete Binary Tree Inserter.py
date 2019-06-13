@@ -1,45 +1,52 @@
+import collections
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
-import collections
 
+# Solution 1, O(1) insert, O(n) build queue
+# Save treenode to a deque
+# pop from left all nodes that have both left and right children
+# then the front-end of deque will be the parent where new node can be inserted
 class CBTInserter:
 
     def __init__(self, root: TreeNode):
         self.root = root
-        self.q = collections.deque([root])
-        self._clean()
+        self.q = self._build_queue(root)        
 
     def insert(self, v: int) -> int:
-        self._clean()
-        p = self.q.popleft()
-        if p.left is None:
-            p.left = TreeNode(v)
+        p = self.q[0]
+        new_node = TreeNode(v)
+        
+        if p.left:
+            p.right = new_node
             self.q.append(p.left)
-            self.q.appendleft(p)
-        else:
-            p.right = TreeNode(v)
             self.q.append(p.right)
+            self.q.popleft()
+        else:
+            p.left = new_node
+        
         return p.val
 
     def get_root(self) -> TreeNode:
         return self.root
     
-    def _clean(self):
-        while self.q:
-            p = self.q.popleft()
+    def _build_queue(self, root):
+        q = collections.deque([root])
+        
+        while True:
+            curr = q[0]
+            if curr.left and curr.right:
+                q.append(curr.left)
+                q.append(curr.right)
+                q.popleft()
+            else:
+                break
+        return q
             
-            for x in [p.left, p.right]:
-                if x:
-                    self.q.append(x)
-            
-            if not p.left or not p.right:
-                self.q.appendleft(p)
-                break                
-    
+
 
 # Your CBTInserter object will be instantiated and called as such:
 # obj = CBTInserter(root)

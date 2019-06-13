@@ -24,3 +24,23 @@ class Solution:
         self.dfs(root, 0)
         
         return self.res
+
+# Solution 2, without globall variable
+class Solution:
+    def dfs(self, node, curr):
+        if node is None:
+            return 0
+        
+        curr = curr * 2 + node.val
+        
+        if node.left is None and node.right is None:
+            return curr
+        
+        res = self.dfs(node.left, curr) + self.dfs(node.right, curr)
+        
+        return res
+        
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+        res = self.dfs(root, 0)
+        
+        return res

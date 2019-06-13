@@ -1,19 +1,20 @@
-from heapq import *
+import heapq
 
 # Solution 1, priority queue
+# First push first row to priority queue
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        m, n = len(matrix), len(matrix[0]) if matrix else 0
-        q = []
-        for j in range(n):
-            heappush(q, [matrix[0][j], 0, j])
+        n = len(matrix)
         
-        while k > 0:
-            res, i, j = heappop(q)
-            if i + 1 < m:
-                heappush(q, [matrix[i + 1][j], i + 1, j])
-            k -= 1
-        return res
+        q = [[matrix[0][j], 0, j] for j in range(n)]
+        
+        heapq.heapify(q)
+        
+        for _ in range(k):
+            val, i, j = heapq.heappop(q)
+            if i < n - 1:
+                heapq.heappush(q, [matrix[i + 1][j], i + 1, j])
+        return val
 
 # Solution 2, Binary Search on Value Space
 class Solution:

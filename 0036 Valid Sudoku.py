@@ -1,8 +1,9 @@
 import collections
 
+# Solution 1, simulation
 class Solution:
-    def check(self, cans):
-        d = collections.Counter(cans)
+    def check(self, vals):
+        d = collections.Counter(vals)
         
         for c, v in d.items():
             if c != '.' and v > 1:

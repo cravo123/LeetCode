@@ -1,11 +1,10 @@
 import collections
 
+# Solution 1, simulation, hashmap
 class Solution:
-    def build_dict(self, matrix):
-        d = collections.defaultdict(dict)
+    def build_dict(self, matrix, m, n):
+        d = collections.defaultdict(lambda: collections.defaultdict(int))
         
-        m, n = len(matrix), len(matrix[0]) if matrix else 0
-
         for i in range(m):
             for j in range(n):
                 if matrix[i][j]:
@@ -14,16 +13,16 @@ class Solution:
         return d
         
     def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
-        da, db = self.build_dict(A), self.build_dict(list(zip(*B)))
+        m, n = len(A), len(A[0]) if A else 0
+        p = len(B[0]) if B else 0
         
-        m = len(A)
-        n = len(B[0])
+        a_d = self.build_dict(A, m, n) # d[row][col]
+        b_d = self.build_dict(list(zip(*B)), p, n) # d[col][row]
         
-        res = [[0 for _ in range(n)] for _ in range(m)]
+        res = [[0 for _ in range(p)] for _ in range(m)]
         
-        for i in range(m):
-            for j in range(n):
-                for col in da[i]:
-                    if col in db[j]:
-                        res[i][j] += da[i][col] * db[j][col]
+        for i in a_d:
+            for j in b_d:
+                for k in a_d[i]:
+                    res[i][j] += a_d[i][k] * b_d[j][k]
         return res

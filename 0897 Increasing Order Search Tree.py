@@ -5,6 +5,8 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, recursion
+# return both new head and tail
 class Solution:
     def dfs(self, node):
         if node is None:

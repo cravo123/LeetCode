@@ -1,3 +1,5 @@
+import bisect
+
 # Solution 1, linear search, O(n)
 class Solution:
     def nextGreatestLetter(self, letters: List[str], target: str) -> str:

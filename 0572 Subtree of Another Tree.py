@@ -17,7 +17,7 @@ class Solution:
             return t is None
         return self.same(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
 
-# Solution 2, we can pre-order traverse the tree, and remember null node as well,
+# Solution 2, we can pre-order traverse the tree, and cache null node as well,
 # then to check if string_t is a substring of string_s
 class Solution:
     def dfs(self, node, path):

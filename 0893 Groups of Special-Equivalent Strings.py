@@ -1,3 +1,5 @@
+# Solution 1, simulation
+# The problem means that all chars in odd(even) position are equivalent to each other
 class Solution:
     def change(self, S):
         odd, even = [], []

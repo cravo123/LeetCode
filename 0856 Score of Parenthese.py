@@ -1,3 +1,4 @@
+# Solution 1, stack
 class Solution:
     def scoreOfParentheses(self, S: str) -> int:
         q = []

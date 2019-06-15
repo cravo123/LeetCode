@@ -23,6 +23,7 @@
 #        :rtype List[NestedInteger]
 #        """
 
+# Solution 1, stack simulation
 class NestedIterator(object):
 
     def __init__(self, nestedList):
@@ -31,7 +32,6 @@ class NestedIterator(object):
         :type nestedList: List[NestedInteger]
         """
         self.q = nestedList[::-1]
-        self.clean()
     
     def clean(self):
         while self.q and not self.q[-1].isInteger():
@@ -42,7 +42,6 @@ class NestedIterator(object):
         """
         :rtype: int
         """
-        self.clean()
         p = self.q.pop()
         return p.getInteger()
 

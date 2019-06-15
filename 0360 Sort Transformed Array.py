@@ -44,4 +44,37 @@ class Solution:
                     j -= 1
                 idx += 1
         return res
+
+# Solution 2.1,
+class Solution:
+    def sortTransformedArray(self, nums: List[int], a: int, b: int, c: int) -> List[int]:
+        if a == 0:
+            # line
+            if b >= 0:
+                res = nums
+            else:
+                res = nums[::-1]
+        else:
+            # quadratic
+            v = -b / (2 * a)
+
+            res = nums[::]
+            idx = len(res) - 1
+
+            i, j = 0, len(nums) - 1
+
+            while i <= j:
+                if abs(nums[i] - v) > abs(nums[j] - v):
+                    res[idx] = nums[i]
+                    i += 1
+                else:
+                    res[idx] = nums[j]
+                    j -= 1
+                idx -= 1
+            if a < 0:
+                res = res[::-1]
+        
+        res = [a * x * x + b * x + c for x in res]
+        
+        return res
             

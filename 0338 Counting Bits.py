@@ -1,3 +1,4 @@
+# Solution 1, dp-like
 class Solution:
     def countBits(self, num: int) -> List[int]:
         dp = [0 for _ in range(num + 1)]

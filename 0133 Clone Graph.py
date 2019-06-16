@@ -5,6 +5,7 @@ class Node:
         self.val = val
         self.neighbors = neighbors
 """
+# Solution 1, DFS, cache node -> node copy first
 class Solution:
     def dfs(self, node, d):
         d[node] = Node(node.val, None)

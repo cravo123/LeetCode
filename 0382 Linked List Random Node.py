@@ -1,3 +1,4 @@
+import random
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -10,7 +11,7 @@
 # and there is 1 / n probability that we update to new value
 # Given conditional probability, we know that each value has equal
 # probability to be chosen.
-import random
+# Similar idea can be choosing k elements from n population
 class Solution:
 
     def __init__(self, head: ListNode):

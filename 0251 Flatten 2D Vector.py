@@ -1,4 +1,5 @@
-# Solution 1
+# Solution 1, simulation
+# Similar to LC 0900 RLE Iterator
 class Vector2D:
 
     def __init__(self, v: List[List[int]]):
@@ -22,7 +23,8 @@ class Vector2D:
         self.move_idx()
         return self.q_idx != len(self.q)
 
-# Solution 2
+# Solution 2, priority queue
+# push (idx in v, idx in v[idx]) to heapq
 from heapq import *
 
 class Vector2D:
@@ -47,6 +49,29 @@ class Vector2D:
 
     def hasNext(self) -> bool:
         return len(self.q) > 0
+
+# Solution 3, stack simulation
+class RLEIterator:
+
+    def __init__(self, A: List[int]):
+        self.q = [[A[i], A[i + 1]] for i in range(0, len(A), 2)]
+        self.q = self.q[::-1]
+
+    def next(self, n: int) -> int:
+        while self.q and self.q[-1][0] < n:
+            n -= self.q[-1][0]
+            self.q.pop()
+        
+        if not self.q:
+            return -1
+        
+        self.q[-1][0] -= n
+        res = self.q[-1][1]
+        
+        if self.q[-1][0] == 0:
+            self.q.pop()
+        
+        return res
 
 # Your Vector2D object will be instantiated and called as such:
 # obj = Vector2D(v)

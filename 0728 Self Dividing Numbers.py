@@ -1,12 +1,12 @@
+# Solution 1, simulation
 class Solution:
-    def check(self, v):
-        for c in str(v):
-            if c == '0' or v % int(c) > 0:
+    def divisable(self, val):
+        for c in map(int, str(val)):
+            if c == 0 or val % c != 0:
                 return False
         return True
         
     def selfDividingNumbers(self, left: int, right: int) -> List[int]:
-        
-        res = [c for c in range(left, right + 1) if self.check(c)]
+        res = [val for val in range(left, right + 1) if self.divisable(val)]
         
         return res

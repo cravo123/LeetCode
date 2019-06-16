@@ -7,6 +7,7 @@
 from heapq import *
 
 # Solution 1, Priority Queue, space efficient, but not as fast as built-in
+# priority queue saves "iterator of each person's time"
 class Solution:
     def employeeFreeTime(self, schedule: List[List[Interval]]) -> List[Interval]:
         q = []
@@ -36,22 +37,44 @@ class Solution:
 
 # Solution 2, built-in sort
 class Solution:
-    def employeeFreeTime(self, schedule: List[List[Interval]]) -> List[Interval]:
-        if not schedule:
-            return []
+    def employeeFreeTime(self, schedule: List[List[List[int]]]) -> List[List[int]]:
         q = []
         
-        for row in schedule:
-            q.extend(row)
+        for ts in schedule:
+            q.extend(ts)
         
-        q.sort(key=lambda x: x.start)
+        q.sort()
         
         res = []
-        pre = q[0].start
         
-        for row in q:
-            if pre < row.start:
-                res.append(Interval(pre, row.start))
-            pre = max(pre, row.end)
+        curr = q[0][1]
+        
+        for t in q:
+            if curr < t[0]:
+                res.append([curr, t[0]])
+            curr = max(curr, t[1])
+        
+        return res
+
+# Solution 3, sweep line
+class Solution:
+    def employeeFreeTime(self, schedule: List[List[List[int]]]) -> List[List[int]]:
+        q = []
+        
+        for ts in schedule:
+            for t in ts:
+                q.append([t[0], 1])
+                q.append([t[1], -1])
+        
+        q.sort()
+        cnt = 0
+        prev = q[0][0]
+        res = []
+        
+        for t, tag in q:
+            if cnt == 0 and prev < t:
+                res.append([prev, t])
+            prev = max(prev, t)
+            cnt += tag
         
         return res

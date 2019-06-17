@@ -20,10 +20,11 @@ class Solution:
         s = bin(N)[2:]
         
         res = 0
+        prev = float('inf')
         
-        j = float('inf')
-        for i in range(len(s)):
-            if s[i] == '1':
-                res = max(res, i - j)
-                j = i
+        for i, c in enumerate(s):
+            if c == '1':
+                res = max(res, i - prev)
+                prev = i
+        
         return res

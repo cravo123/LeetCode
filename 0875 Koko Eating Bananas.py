@@ -1,3 +1,4 @@
+# Solution 1, binary search on range value
 class Solution:
     def minEatingSpeed(self, piles: List[int], H: int) -> int:
         # Binary Search on Value Space

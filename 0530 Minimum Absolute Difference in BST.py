@@ -29,7 +29,6 @@ class Solution:
         return res
 
 # Solution 2, Recursion
-
 class Solution:
     def dfs(self, node, prev):
         if node is None:

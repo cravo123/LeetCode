@@ -7,6 +7,7 @@
 
 import collections
 
+# Solution 1, recursion + hashmap
 class Solution:
     def dfs(self, node, d):
         if node is None:

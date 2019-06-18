@@ -1,3 +1,7 @@
+import collections
+
+# Solution 1, simulation
+# count each edge
 class Solution:
     def leastBricks(self, wall: List[List[int]]) -> int:
         d = collections.Counter()

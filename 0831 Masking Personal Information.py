@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def mask_email(self, S):
         S = S.lower()
@@ -11,7 +12,7 @@ class Solution:
         if len(S) > 10:
             res = ['+' + '*' * (len(S) - 10)]
         res.append('***-***')
-        res.append(''.join(str(c) for c in S[-4:]))
+        res.append(''.join(S[-4:]))
         res = '-'.join(res)
         
         return res

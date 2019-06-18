@@ -41,3 +41,26 @@ class Solution:
             res += dp[i][1]
         
         return res
+
+# Solution 2.1, DP
+class Solution:
+    def rotatedDigits(self, N: int) -> int:
+        same = set([0, 1, 8])
+        diff = set([2, 5, 6, 9])
+        total = same | diff
+        
+        res = 0
+        d = {}
+        d[0] = 1 # 1 means same digit, 2 means there is diff digit
+        
+        for i in range(1, N + 1):
+            first, second = divmod(i, 10)
+            if second not in total or first not in d:
+                continue
+            if d[first] == 1 and second in same:
+                d[i] = 1
+            else:
+                res += 1
+                d[i] = 2
+        
+        return res

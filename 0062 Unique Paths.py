@@ -1,3 +1,5 @@
+import math
+
 # Solution 1, O(M * N) space
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
@@ -14,10 +16,15 @@ class Solution:
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         dp = [0 for _ in range(n + 1)]
-        dp[1] = 1
+        dp[1] = 1 # gotcha, dp[0] = 1 is not correct
         
-        for i in range(m):
+        for _ in range(m):
             for j in range(1, n + 1):
                 dp[j] += dp[j - 1]
         
         return dp[-1]
+
+# Solution 3, mathematical solution
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        return math.factorial(m + n - 2) // math.factorial(m - 1) // math.factorial(n - 1)

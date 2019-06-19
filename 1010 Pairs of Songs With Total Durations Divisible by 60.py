@@ -13,7 +13,7 @@ class Solution:
         
         return res
 
-# Solution 2: O(n)
+# Solution 2:
 class Solution:
     def numPairsDivisibleBy60(self, time: List[int]) -> int:
         d = collections.Counter()
@@ -30,5 +30,18 @@ class Solution:
                 break
             else:
                 res += d[t] * d[60 - t]
+        
+        return res
+
+# Solution 3, 
+class Solution:
+    def numPairsDivisibleBy60(self, time: List[int]) -> int:
+        d = collections.Counter()
+        res = 0
+        
+        for t in time:
+            t = t % 60
+            res += d[(60 - t) % 60]
+            d[t] += 1
         
         return res

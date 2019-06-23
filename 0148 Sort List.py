@@ -40,4 +40,25 @@ class Solution:
         p, q = self.sortList(head), self.sortList(slow)
         
         return self.merge(p, q)
+
+# Solution 2, insertion sort
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        dummy = ListNode(None)
+        
+        curr = head
+        
+        while curr:
+            tmp = curr.next
             
+            # check where to insert
+            runner = dummy
+            while runner.next and runner.next.val < curr.val:
+                runner = runner.next
+            
+            curr.next = runner.next # insert to new linked list
+            runner.next = curr
+            
+            curr = tmp
+        
+        return dummy.next

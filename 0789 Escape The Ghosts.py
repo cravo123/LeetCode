@@ -1,3 +1,4 @@
+# Solution 1, greedy
 # Intuition is that, instead of chasing you around the map, 
 # ghost can go to target, and wait for you. This is an optimial strategy
 # because sum of two edges of a triangle is larger than the third one.

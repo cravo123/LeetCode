@@ -1,3 +1,4 @@
+# Solution 1, back-tracking
 class Solution:
     def eligible(self, path, i):
         n = len(path)
@@ -19,7 +20,7 @@ class Solution:
                 self.dfs(idx + 1, n, path, res)
                 path.pop()
     
-    def transform(self, cols):
+    def draw(self, cols):
         n = len(cols)
         board = [['.'] * n for _ in range(n)]
         
@@ -34,6 +35,6 @@ class Solution:
         
         self.dfs(0, n, path, res)
         
-        res = [self.transform(cols) for cols in res]
+        res = [self.draw(cols) for cols in res]
         
         return res

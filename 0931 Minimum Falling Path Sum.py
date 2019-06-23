@@ -1,3 +1,4 @@
+# Solution 1, DP
 class Solution:
     def minFallingPathSum(self, A: List[List[int]]) -> int:
         n = len(A[0])
@@ -23,3 +24,5 @@ class Solution:
                 tmp[j] = row[j] + min(left, mid, right)
             curr = tmp
         return min(curr)
+
+# Solution 1.1, similar DP idea

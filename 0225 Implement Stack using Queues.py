@@ -1,5 +1,14 @@
 from collections import deque
 
+# Solution 1, simulation
+# Step 1, append new val to the end of queue
+# Step 2, pop every value from left except the new val from head of queue, 
+#         and append them to the end.
+# By doing this, we essentially reverse the order in the queue!
+# [4, 3, 2, 1], add 5
+# Step 1, [4, 3, 2, 1, 5]
+# Step 2, [5, 4, 3, 2, 1]
+
 class MyStack:
 
     def __init__(self):

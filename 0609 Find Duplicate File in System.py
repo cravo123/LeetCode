@@ -1,5 +1,6 @@
 import collections
 
+# Solution 1, simulation
 class Solution:
     def parse(self, info, d):
         info = info.split()
@@ -20,3 +21,8 @@ class Solution:
         res = [content for content in d.values() if len(content) > 1]
         
         return res
+
+# Follow-up questions
+# Use meta data / size / hashcode of contents as keys to store files
+# Only compare contents of files that have same above value
+# t.b.c

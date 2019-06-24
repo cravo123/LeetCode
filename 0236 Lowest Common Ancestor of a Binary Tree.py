@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, p, q):
         if node is None or node is p or node is q:
@@ -26,7 +26,7 @@ class Solution:
         """
         return self.dfs(root, p, q)
 
-# Iteration
+# Solution 2, iteration
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
         """

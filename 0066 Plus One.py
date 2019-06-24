@@ -1,26 +1,25 @@
-# Solution 1
-class Solution(object):
-    def plusOne(self, digits):
-        """
-        :type digits: List[int]
-        :rtype: List[int]
-        """
-        res = []
+# Solution 1, simulation
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
         carry = 1
-        for c in reversed(digits):
-            carry += c
-            carry, v = divmod(carry, 10)
-            res.append(v)
+        
+        for i in range(len(digits) - 1, -1, -1):
+            if carry == 0:
+                return digits
+            carry += digits[i]
+            carry, val = divmod(carry, 10)
+            digits[i] = val
         
         if carry:
-            res.append(carry)
-        
-        res.reverse()
+            res = [carry] + digits
+        else:
+            res = digits
         
         return res
 
 # Solution 2
-class Solution(object):
+# Find last non-9 position first
+class Solution:
     def plusOne(self, digits):
         """
         :type digits: List[int]

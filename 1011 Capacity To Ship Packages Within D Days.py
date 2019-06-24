@@ -1,4 +1,5 @@
-# Binary Search on Range, same to LC  0875
+# Solution 1, Binary Search on Range, 
+# same as LC 0875 Koko Eating Bananas
 class Solution:
     def count_days(self, capacity, weights):
         res = 0

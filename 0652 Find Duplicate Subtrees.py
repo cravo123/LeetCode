@@ -27,6 +27,6 @@ class Solution:
         
         self.dfs(root, d)
         
-        res = [d[c][0] for c in d if len(d[c]) > 1]
+        res = [val[0] for val in d.values() if len(val) > 1]
         
         return res

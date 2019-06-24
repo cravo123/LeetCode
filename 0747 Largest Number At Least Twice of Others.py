@@ -1,4 +1,5 @@
-# Solution 1
+from heapq import *
+# Solution 1, simulation
 class Solution:
     def dominantIndex(self, nums: List[int]) -> int:
         val = max(nums)
@@ -12,8 +13,6 @@ class Solution:
         return res
 
 # Solution 2, maintain priority queue of two largest number
-from heapq import * 
-
 class Solution:
     def dominantIndex(self, nums: List[int]) -> int:
         if len(nums) == 1:

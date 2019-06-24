@@ -5,23 +5,19 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, recursion
+# return once we found a larger value
 class Solution:
-    def dfs(self, node, target):
+    def dfs(self, node, curr):
         if node is None:
-            return -1
-        if node.val != target:
+            return float('inf')
+        if node.val > curr:
             return node.val
-        L, R = self.dfs(node.left, target), self.dfs(node.right, target)
-        
-        if L == -1:
-            return R
-        if R == -1:
-            return L
-        return min(L, R)
+        return min(self.dfs(node.left, curr), self.dfs(node.right, curr))
         
     def findSecondMinimumValue(self, root: TreeNode) -> int:
-        if root is None:
-            return -1
-        res = self.dfs(root, root.val)
+        curr = root.val
         
-        return res
+        res = self.dfs(root, curr)
+        
+        return res if res < float('inf') else -1

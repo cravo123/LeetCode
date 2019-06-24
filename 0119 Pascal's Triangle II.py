@@ -1,15 +1,12 @@
+# Solution 1, simulation
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
-        q = [1]
-        idx = 0
+        q = [0 for _ in range(rowIndex + 1)]
         
-        while idx <= rowIndex:
-            tmp = [1 for _ in range(idx + 1)]
+        for i in range(rowIndex + 1):
+            q[i] = 1
             
-            i = 1
-            while i < idx:
-                tmp[i] = q[i - 1] + q[i]
-                i += 1
-            q = tmp
-            idx += 1
+            for j in range(i - 1, 0, -1):
+                q[j] += q[j - 1]
+        
         return q

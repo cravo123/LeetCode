@@ -5,6 +5,7 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, Recursion
 class Solution:
     def dfs(self, node):
         if node is None:

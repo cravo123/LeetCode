@@ -25,4 +25,39 @@ class Solution:
         return 
 
 # Solution 2, binary search on value range
-# t.b.c
+# t.b.cclass Solution:
+    def tokenize(self, S):
+        q = []
+        
+        i, n = 0, len(S)
+        while i < n:
+            if S[i] == ',':
+                i += 1
+            if S[i].isalpha():
+                q.append([S[i]])
+                i += 1
+            else:
+                tmp = []
+                i += 1
+                while i < n and S[i] != '}':
+                    if S[i] == ',':
+                        i += 1
+                    else:
+                        tmp.append(S[i])
+                        i += 1
+                q.append(tmp)
+                i += 1
+        return q
+        
+    def permute(self, S: str) -> List[str]:
+        q = self.tokenize(S)
+        
+        res = [[]]
+        
+        for cs in q:
+            res = [path + [c] for path in res for c in cs]
+        
+        res = [''.join(path) for path in res]
+        res.sort()
+        
+        return res

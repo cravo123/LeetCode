@@ -5,6 +5,7 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, simulation, recursion, DFS
 class Solution:
     def depth(self, node):
         if node is None:

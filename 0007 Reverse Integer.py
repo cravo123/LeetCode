@@ -1,19 +1,14 @@
-class Solution(object):
-    def reverse(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
-        is_neg = x < 0
+# Solution 1, simulation
+class Solution:
+    def reverse(self, x: int) -> int:
+        sign_val = -1 if x < 0 else 1
         x = abs(x)
         
         res = 0
-        while x > 0:
-            res = res * 10 + x % 10
-            x //= 10
         
-        res = -res if is_neg else res
+        for c in reversed(str(x)):
+            res = res * 10 + int(c)
         
-        if int(-2**31) <= res <= int(2**31 - 1):
-            return res
-        return 0
+        res *= sign_val
+        
+        return res if - 2 ** 31 <= res <= 2 ** 31 - 1 else 0

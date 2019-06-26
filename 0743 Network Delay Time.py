@@ -1,15 +1,9 @@
+import collections
 import heapq
 
 # Solution 1, Best-First-Search with priority queue
-
 class Solution:
-    def networkDelayTime(self, times, N, K):
-        """
-        :type times: List[List[int]]
-        :type N: int
-        :type K: int
-        :rtype: int
-        """
+    def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
         d = collections.defaultdict(dict)
         
         for u, v, w in times:

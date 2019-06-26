@@ -1,4 +1,5 @@
 import collections
+
 # Solution 1, more elegant
 class Solution:
     def canThreePartsEqualSum(self, A: List[int]) -> bool:
@@ -8,15 +9,17 @@ class Solution:
             return False
         
         target = total // 3
-        cnt = 0
         curr = 0
+        cnt = 0
         
         for c in A:
             curr += c
             if curr == target:
                 cnt += 1
                 curr = 0
-        return cnt >= 3
+            if cnt == 3:
+                return True
+        return False
 
 # Solution 2, two pointers
 class Solution:
@@ -55,7 +58,6 @@ class Solution:
         target = total // 3
         
         d = collections.defaultdict(set)
-        n = len(A)
         curr = 0
         
         for i, c in enumerate(A):

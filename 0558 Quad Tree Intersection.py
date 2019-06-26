@@ -9,6 +9,8 @@ class Node:
         self.bottomLeft = bottomLeft
         self.bottomRight = bottomRight
 """
+
+# Solution 1, recursion
 class Solution:
     def dfs(self, p, q):
         if p.isLeaf:

@@ -1,10 +1,11 @@
+import collections
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
-import collections
 
 # Solution 1, need row, col and count as indexing
 # This is because at last we sort by row number
@@ -36,13 +37,6 @@ class Solution:
 
 # Solution 2, BFS level-order traversing is easier
 # since in BFS, we don't need to sort by rows
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
 class Solution:
     def verticalOrder(self, root: TreeNode) -> List[List[int]]:
         d = collections.defaultdict(list)
@@ -62,6 +56,6 @@ class Solution:
                     tmp.append([p.right, col + 1])
             q = tmp
         
-        res = [list(d[col]) for col in sorted(d)]
+        res = [d[col] for col in sorted(d)]
         
         return res

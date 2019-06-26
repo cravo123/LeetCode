@@ -1,3 +1,5 @@
+# Solution 1, simulation
+
 class Solution:
     def isStrobogrammatic(self, num: str) -> bool:
         d = {

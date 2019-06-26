@@ -1,6 +1,5 @@
 # Solution 1, simulation
 # By rotate board clock-wise, we can simulate "crushing" by move zeros to the end for each row
-
 class Solution:
     def candyCrush(self, board: 'List[List[int]]') -> 'List[List[int]]':
         board = [list(x) for x in zip(*reversed(board))]
@@ -28,7 +27,6 @@ class Solution:
             for i in range(m):
                 tmp = [c for c in board[i] if c]
                 board[i] = tmp + [0] * (n - len(tmp))
-           # print(board, cancel)
         
         board = [list(x) for x in zip(*board)]
         board = list(reversed(board))
@@ -56,7 +54,7 @@ class Solution:
             
             for i in range(m):
                 for j in range(n):
-                    if board[i][j] == 0:
+                    if board[i][j] == 0: # gotcha
                         continue
                     if i < m - 2 and board[i][j] == board[i + 1][j] == board[i + 2][j]:
                         cancel |= set([(i, j), (i + 1, j), (i + 2, j)])

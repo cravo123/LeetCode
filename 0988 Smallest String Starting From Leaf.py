@@ -5,19 +5,18 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, enumerate all possibilities
 class Solution:
     def dfs(self, node, path, res):
         if node is None:
             return
-        path.append(chr(ord('a') + node.val))
+        c = chr(ord('a') + node.val)
+        path.append(c)
         if node.left is None and node.right is None:
-            res.append(path[::])
-            path.pop()
-            return
+            res.append(''.join(reversed(path)))
         self.dfs(node.left, path, res)
         self.dfs(node.right, path, res)
         path.pop()
-        
         
     def smallestFromLeaf(self, root: 'TreeNode') -> 'str':
         res = []

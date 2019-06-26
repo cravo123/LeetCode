@@ -1,3 +1,5 @@
+import heapq
+
 # Solution 1, decoupling
 # Separate User as a new class
 
@@ -44,7 +46,10 @@ class Twitter:
         
     def getNewsFeed(self, userId: int) -> List[int]:
         """
-        Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
+        Retrieve the 10 most recent tweet ids in the user's news feed. 
+        Each item in the news feed must be posted by users 
+        who the user followed or by the user herself. 
+        Tweets must be ordered from most recent to least recent.
         """
         self._add_new_user(userId)
         curr = self.users[userId]
@@ -67,14 +72,13 @@ class Twitter:
         
         return res
         
-            
     def follow(self, followerId: int, followeeId: int) -> None:
         """
         Follower follows a followee. If the operation is invalid, it should be a no-op.
         """
         self._add_new_user(followerId)
         self._add_new_user(followeeId)
-        curr = self.users[followerId].follow(followeeId)
+        self.users[followerId].follow(followeeId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
         """
@@ -82,7 +86,7 @@ class Twitter:
         """
         self._add_new_user(followerId)
         self._add_new_user(followeeId)
-        curr = self.users[followerId].unfollow(followeeId)
+        self.users[followerId].unfollow(followeeId)
         
 
 

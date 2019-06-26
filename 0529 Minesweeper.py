@@ -1,3 +1,4 @@
+# Solution 1, DFS, simulation
 class Solution:
     def count(self, i, j, board, m, n):
         cnt = 0

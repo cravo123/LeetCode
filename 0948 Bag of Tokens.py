@@ -1,26 +1,24 @@
-class Solution(object):
-    def bagOfTokensScore(self, tokens, P):
-        """
-        :type tokens: List[int]
-        :type P: int
-        :rtype: int
-        """
-        power = P
-        res = points = 0
-        
+# Solution 1, greedy
+# Use cheapest token to gain point, otherwise Use most expensive token to gain power
+class Solution:
+    def bagOfTokensScore(self, tokens: List[int], P: int) -> int:
         tokens.sort()
+        
         i, j = 0, len(tokens) - 1
         
-        while i <= j and (power >= tokens[i] or points > 0):
-            if power >= tokens[i]:
-                power -= tokens[i]
-                points += 1
+        pts = res = 0
+        
+        while i <= j:
+            if P >= tokens[i]:
+                P -= tokens[i]
                 i += 1
-            elif points > 0:
-                points -= 1
-                power += tokens[j]
+                pts += 1
+            elif pts > 0:
+                P += tokens[j]
                 j -= 1
-            
-            res = max(res, points)
+                pts -= 1
+            else:
+                break
+            res = max(res, pts)
         
         return res

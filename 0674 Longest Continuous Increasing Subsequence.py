@@ -17,15 +17,16 @@ class Solution:
 # Solution 2, memory O(1)
 class Solution:
     def findLengthOfLCIS(self, nums: List[int]) -> int:
-        res = curr = 0
+        res = 0
+        cnt = 0
         prev = float('-inf')
         
         for c in nums:
             if c > prev:
-                curr += 1
-                res = max(res, curr)
+                cnt += 1
             else:
-                curr = 1
+                cnt = 1
             prev = c
+            res = max(res, cnt)
         
         return res

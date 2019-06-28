@@ -4,9 +4,11 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, simulation
+# Keep sorted variant in a separate linked list
 class Solution:
     def insertionSortList(self, head: ListNode) -> ListNode:
-        dummy = ListNode(0)
+        dummy = ListNode(None)
         
         curr = head
         

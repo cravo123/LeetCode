@@ -14,11 +14,11 @@ class Solution:
 # Solution 2
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        curr = float('inf')
         res = 0
-        curr_min = float('inf')
         
         for c in prices:
-            curr_min = min(curr_min, c)
-            res = max(res, c - curr_min)
+            res = max(res, c - curr)
+            curr = min(curr, c)
         
         return res

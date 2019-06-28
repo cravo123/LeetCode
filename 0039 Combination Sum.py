@@ -1,22 +1,19 @@
+# Solution 1, back-tracking
 class Solution:
-    def dfs(self, idx, nums, target, path, res):
-        if idx == len(nums) or target <= 0:
-            if target == 0:
-                res.append(path[::])
+    def dfs(self, idx, candidates, target, path, res):
+        if target == 0:
+            res.append(path[::])
             return
         
-        for i in range(idx, len(nums)):
-            path.append(nums[i])
-            self.dfs(i, nums, target - nums[i], path, res)
+        if target < 0:
+            return
+        
+        for i in range(idx, len(candidates)):
+            path.append(candidates[i])
+            self.dfs(i, candidates, target - candidates[i], path, res)
             path.pop()
         
-        
-    def combinationSum(self, candidates, target):
-        """
-        :type candidates: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         path = []
         res = []
         

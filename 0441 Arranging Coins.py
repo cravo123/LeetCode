@@ -1,14 +1,4 @@
-# Solution 1, Brute-Force
-class Solution:
-    def arrangeCoins(self, n: int) -> int:
-        i = 0
-        
-        while n - i >= 0:
-            n -= i
-            i += 1
-        return i - 1
-
-# Solution 2, Binary Search on results
+# Solution 1, Binary Search on results
 class Solution:
     def arrangeCoins(self, n: int) -> int:
         left, right = 0, n + 1
@@ -23,3 +13,13 @@ class Solution:
                 right = mid
         
         return left - 1
+
+# Solution 2, Brute-Force
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        i = 0
+        
+        while n - i >= 0:
+            n -= i
+            i += 1
+        return i - 1

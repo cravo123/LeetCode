@@ -1,18 +1,18 @@
+# Solution 1, stack
 class Solution:
     def simplifyPath(self, path: str) -> str:
-        q = ['']
-        
         path = path.split('/')
+        q = []
         
-        for v in path:
-            if v == '..':
-                if q and q[-1]:
-                    q.pop()
-            elif v in [ '', '.', '/']:
+        for name in path:
+            if name == '' or name == '.':
                 continue
+            if name == '..':
+                if q:
+                    q.pop()
             else:
-                q.append(v)
+                q.append(name)
         
-        res = '/'.join(q)
+        res = '/' + '/'.join(q) # Add root dir '/', gotcha
         
-        return res or '/'
+        return res

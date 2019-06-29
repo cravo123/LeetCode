@@ -6,7 +6,7 @@
 #         self.right = None
 
 # Solution 1, recursion
-# dfs returns previous value
+# DFS returns previous value
 class Solution:
     def dfs(self, node, prev_val):
         if node is None:

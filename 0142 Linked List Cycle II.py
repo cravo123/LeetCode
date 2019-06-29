@@ -4,6 +4,10 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, simulation
+# Use fast and slow pointers to find if there is a cycle or not.
+# Then move fast pt back to head, and move both fast and slow one
+# step a time, when they meet, that is where cycle begins.
 class Solution(object):
     def detectCycle(self, head):
         """

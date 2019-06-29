@@ -9,32 +9,32 @@ class Node:
         self.bottomLeft = bottomLeft
         self.bottomRight = bottomRight
 """
+
+# Solution 1, recursion
 class Solution:
-    def dfs(self, r_start, r_end, c_start, c_end, grid):
-        v = grid[r_start][c_start]
+    def dfs(self, up, down, left, right, grid):
+        v = grid[up][left]
         flag = True
-        for i in range(r_start, r_end + 1):
-            for j in range(c_start, c_end + 1):
+        for i in range(up, down + 1):
+            for j in range(left, right + 1):
                 if grid[i][j] != v:
                     flag = False
                     break
         
         if flag:
             return Node(v, True, None, None, None, None)
-        else:
-            res = Node(None, False, None, None, None, None)
-            r_mid = (r_start + r_end) // 2
-            c_mid = (c_start + c_end) // 2
-            res.topLeft = self.dfs(r_start, r_mid, c_start, c_mid, grid)
-            res.topRight = self.dfs(r_start, r_mid, c_mid + 1, c_end, grid)
-            res.bottomLeft = self.dfs(r_mid + 1, r_end, c_start, c_mid, grid)
-            res.bottomRight = self.dfs(r_mid + 1, r_end, c_mid + 1, c_end, grid)
-            
-            return res
+        
+        r_mid = (up + down) // 2
+        c_mid = (left + right) // 2
+        
+        tl = self.dfs(up, r_mid, left, c_mid, grid)
+        tr = self.dfs(up, r_mid, c_mid + 1, right, grid)
+        bl = self.dfs(r_mid + 1, down, left, c_mid, grid)
+        br = self.dfs(r_mid + 1, down, c_mid + 1, right, grid)
+        
+        return Node(None, False, tl, tr, bl, br)
         
     def construct(self, grid: List[List[int]]) -> 'Node':
         n = len(grid)
         
-        res = self.dfs(0, n - 1, 0, n - 1, grid)
-        
-        return res
+        return self.dfs(0, n - 1, 0, n - 1, grid)

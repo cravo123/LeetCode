@@ -1,21 +1,21 @@
-# Solution 1,
+# Solution 1, simulation
+# first cache all not-equal indices
 class Solution:
     def buddyStrings(self, A: str, B: str) -> bool:
         if len(A) != len(B):
             return False
+        if A == B:
+            return len(set(A)) < len(A)
         
-        cans = []
+        q = []
         
-        for i in range(len(A)):
-            if A[i] != B[i]:
-                cans.append(i)
+        for a, b in zip(A, B):
+            if a != b:
+                q.append([a, b])
         
-        if len(cans) == 0:
-            return len(A) > len(set(A))
-        else:
-            return len(cans) == 2 and A[cans[0]] == B[cans[1]] and A[cans[1]] == B[cans[0]]
+        return len(q) == 2 and q[0] == q[1][::-1]
 
-# Solution 2, Two Pointers
+# Solution 2, Two-Pointer
 class Solution:
     def buddyStrings(self, A: str, B: str) -> bool:
         if len(A) != len(B):

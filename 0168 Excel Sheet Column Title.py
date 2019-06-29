@@ -1,37 +1,14 @@
-# Solution 1
-class Solution(object):
-    def convertToTitle(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
+# Solution 1, simulation
+class Solution:
+    def convertToTitle(self, n: int) -> str:
         q = []
         
         while n > 0:
-            q.append((n - 1) % 26)
+            idx = (n - 1) % 26
+            q.append(chr(ord('A') + idx))
             n = (n - 1) // 26
-            
-        res = [chr(ord('A') + c) for c in q]
-        res = ''.join(reversed(res))
         
-        return res
-
-# Solution 2
-class Solution(object):
-    def convertToTitle(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
-        q = []
-        
-        while n > 0:
-            n -= 1
-            q.append(n % 26)
-            n //= 26
-            
-        res = [chr(ord('A') + c) for c in q]
-        res = ''.join(reversed(res))
+        res = ''.join(q[::-1])
         
         return res
 

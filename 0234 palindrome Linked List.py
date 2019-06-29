@@ -4,13 +4,11 @@
 #         self.val = x
 #         self.next = None
 
-class Solution(object):
-    def isPalindrome(self, head):
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
-        slow = fast = head
+# Solution 1,
+# Split linked list to two equal parts, and iterate to check
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        fast = slow = head
         
         while fast and fast.next:
             slow = slow.next
@@ -19,10 +17,10 @@ class Solution(object):
         prev, curr = None, slow
         
         while curr:
-            p = curr.next
+            tmp = curr.next
             curr.next = prev
             prev = curr
-            curr = p
+            curr = tmp
         
         p, q = head, prev
         

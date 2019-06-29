@@ -1,4 +1,4 @@
-# Solution 1, Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, x, n):
         if n == 0:

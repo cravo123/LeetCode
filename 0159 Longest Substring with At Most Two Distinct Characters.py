@@ -15,3 +15,6 @@ class Solution:
                 j += 1
             res = max(res, i - j + 1)
         return res
+
+# Solution 1.1, sliding-window
+# A different implementation

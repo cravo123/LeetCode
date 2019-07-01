@@ -1,3 +1,4 @@
+# Solution 1, two-pointer
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         res = 0

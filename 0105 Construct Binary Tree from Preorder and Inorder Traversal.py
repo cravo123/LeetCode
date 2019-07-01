@@ -5,6 +5,7 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, recursion
 class Solution:
     def dfs(self, preorder, pre_i, pre_j, inorder, in_i, in_j):
         if pre_i >= pre_j:

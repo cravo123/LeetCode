@@ -1,32 +1,25 @@
+import heapq
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
 
-from heapq import *
-
+# Solution 1, priority queue
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
-        q = []
+        q = [[p.val, i, p] for i, p in enumerate(lists) if p] # in case p.val is equal, we use i
+        heapq.heapify(q)
         
-        idx = 0
-        for p in lists:
-            if p:
-                heappush(q, (p.val, idx, p))
-                idx += 1
-        
-        dummy = curr = ListNode(0)
+        dummy = curr = ListNode(None)
         
         while q:
-            p = heappop(q)
-            curr.next = p[2]
-            curr = curr.next
+            _, idx, p = heapq.heappop(q)
+            curr.next = p
+            curr = p
             
-            if p[2].next:
-                heappush(q, (p[2].next.val, idx, p[2].next))
-                idx += 1
-        
-        curr.next = None
+            if p.next:
+                heapq.heappush(q, [p.next.val, idx, p.next])
         
         return dummy.next

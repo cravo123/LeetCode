@@ -1,4 +1,5 @@
-# Using negative numbers to mark if we visit this position before is a common trick
+# Solution 1, simulation
+# it is common trick to use negative numbers to mark if we visit this position before
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
         for i in range(len(nums)):

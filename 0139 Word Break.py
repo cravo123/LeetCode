@@ -1,4 +1,4 @@
-# Solution 1, Backward Split
+# Solution 1, Backward Split, memoization
 class Solution:
     def dfs(self, idx, s, d, memo):
         if idx == len(s):
@@ -21,7 +21,7 @@ class Solution:
         
         return self.dfs(0, s, d, memo)
 
-# Solution 2, Forward Split, DP
+# Solution 2, DP, forward split
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         d = set(wordDict)
@@ -31,7 +31,7 @@ class Solution:
         
         for i in range(1, len(s) + 1):
             for j in range(i):
-                if s[j:i] in d and dp[j]:
+                if dp[j] and s[j:i] in d:
                     dp[i] = True
         
         return dp[-1]

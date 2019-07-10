@@ -12,7 +12,7 @@ class Solution:
 # Solution 2, sort and two pointers, 
 # similar to LC 0167 Two Sum II - Input array is sorted
 # Since we need to return index, so we maintain original index
-# Time Complexity, O(n)
+# Time Complexity, O(n) if it is sorted
 # Space, O(1), actually since we cache index, so should be O(n)...
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:

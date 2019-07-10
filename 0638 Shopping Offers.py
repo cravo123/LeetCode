@@ -45,7 +45,6 @@ class Solution:
         d[needs] = res
         return res
     
-    
     def shoppingOffers(self, price: List[int], special: List[List[int]], needs: List[int]) -> int:
         d = {}
         needs = tuple(needs)

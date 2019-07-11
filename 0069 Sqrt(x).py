@@ -1,3 +1,4 @@
+# Solution 1, binary search
 class Solution:
     def mySqrt(self, x: int) -> int:
         i, j = 0, x + 1

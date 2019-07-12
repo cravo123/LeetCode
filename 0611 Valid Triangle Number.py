@@ -1,18 +1,18 @@
+# Solution 1, two-pointer
+# three numbers(a < b < c), can constitute a triangle
+# iff a + b > c
 class Solution:
     def triangleNumber(self, nums: List[int]) -> int:
-        nums.sort()
-        n = len(nums)
-        
         res = 0
+        nums.sort()
         
-        for i in range(2, n):
-            j, k = 0, i - 1
-            
-            while j < k:
-                v = nums[j] + nums[k]
-                if v > nums[i]:
-                    res += k - j
-                    k -= 1
+        for k in range(2, len(nums)):
+            i, j = 0, k - 1
+            while i < j:
+                if nums[i] + nums[j] <= nums[k]:
+                    i += 1
                 else:
-                    j += 1
+                    res += j - i
+                    j -= 1
+        
         return res

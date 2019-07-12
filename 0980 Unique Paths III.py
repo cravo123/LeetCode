@@ -1,37 +1,75 @@
+# Solution 1, DFS
 class Solution:
-    def dfs(self, curr_x, curr_y, end_x, end_y, grid, m, n, total):
-        if curr_x == end_x and curr_y == end_y:
-            return 1 if total == 0 else 0
-        c = grid[curr_x][curr_y]
-        grid[curr_x][curr_y] = -1
-        
-        if c == 0:
-            total -= 1
+    def dfs(self, s_i, s_j, e_i, e_j, cnt, grid, m, n):
+        if (s_i, s_j) == (e_i, e_j):
+            return cnt == 0
         res = 0
-        for dx, dy in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
-            i, j = curr_x + dx, curr_y + dy
-            if 0 <= i < m and 0 <= j < n and grid[i][j] != -1:
-                res += self.dfs(i, j, end_x, end_y, grid, m, n, total)
+        c = grid[s_i][s_j]
+        if c == -1:
+            return res
+        grid[s_i][s_j] = -1
+        cnt -= 1
         
-        grid[curr_x][curr_y] = c
+        for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+            x, y = s_i + di, s_j + dj
+            if 0 <= x < m and 0 <= y < n:
+                res += self.dfs(x, y, e_i, e_j, cnt, grid, m, n)
+        
+        grid[s_i][s_j] = c
+        cnt += 1
         
         return res
         
     def uniquePathsIII(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0]) if grid else 0
         
-        # Find start and end
-        total = 0
+        cnt = 0
         for i in range(m):
             for j in range(n):
-                c = grid[i][j]
-                if c == 1:
-                    start_x, start_y = i, j
-                elif c == 2:
-                    end_x, end_y = i, j
-                elif c == 0:
-                    total += 1
-        res = self.dfs(start_x, start_y, end_x, end_y, grid, m, n, total)
+                if grid[i][j] == 1:
+                    s_i, s_j = i, j
+                elif grid[i][j] == 2:
+                    e_i, e_j = i, j
+                elif grid[i][j] == 0:
+                    cnt += 1
         
-        return res
+        return self.dfs(s_i, s_j, e_i, e_j, cnt + 1, grid, m, n) # need to count start point
+
+# Solution 1.1, similar idea, but use global variable
+class Solution:
+    def dfs(self, s_i, s_j, e_i, e_j, cnt, grid, m, n):
+        if (s_i, s_j) == (e_i, e_j):
+            if cnt == 0:
+                self.res += 1
+            return
         
+        for di, dj in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
+            x, y = s_i + di, s_j + dj
+            if 0 <= x < m and 0 <= y < n and grid[x][y] != -1:
+                c = grid[x][y]
+                if c == 0:
+                    cnt -= 1
+                grid[x][y] = -1
+                self.dfs(x, y, e_i, e_j, cnt, grid, m, n)
+                grid[x][y] = c
+                if c == 0:
+                    cnt += 1
+        
+    def uniquePathsIII(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0]) if grid else 0
+        
+        cnt = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    s_i, s_j = i, j
+                elif grid[i][j] == 2:
+                    e_i, e_j = i, j
+                elif grid[i][j] == 0:
+                    cnt += 1
+        
+        self.res = 0
+        grid[s_i][s_j] = -1
+        self.dfs(s_i, s_j, e_i, e_j, cnt, grid, m, n)
+        
+        return self.res

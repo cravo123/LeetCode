@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, res):
         if node is None:
@@ -19,7 +19,7 @@ class Solution:
         self.dfs(root, res)
         return res
 
-# Iteration 1
+# Solution 2, iteration 1
 class Solution:
     def postorderTraversal(self, root: 'TreeNode') -> 'List[int]':
         p, q = root, []
@@ -41,7 +41,7 @@ class Solution:
                     last = x
         return res
 
-# Iteration 2
+# Solution 2, iteration 2
 # Traverse in Node -> Right -> Left, then reverse to be Left -> Right -> Node
 class Solution:
     def postorderTraversal(self, root: 'TreeNode') -> 'List[int]':

@@ -1,3 +1,5 @@
+import bisect
+
 # Solution 1, implement bisect functions
 class Solution:
     def lower_bound(self, nums, target):
@@ -11,7 +13,6 @@ class Solution:
                 j = m
         return i if nums[i] == target else -1
         
-    
     def upper_bound(self, nums, target):
         i, j = 0, len(nums)
         
@@ -32,7 +33,6 @@ class Solution:
         return [i, j]
 
 # Solution 2, use bisect directly
-import bisect
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         i = bisect.bisect_left(nums, target)

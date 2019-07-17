@@ -18,8 +18,7 @@ class Solution:
             if query[i].isupper():
                 return False
             i += 1
-        return True
-            
+        return True     
         
     def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
         

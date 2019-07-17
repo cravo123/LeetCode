@@ -44,6 +44,22 @@ class Solution:
         
         return self.res
 
+# Solution 2.1, similar recursion idea, but better implementation
+class Solution:
+    def dfs(self, node, target, curr_res):
+        if node is None:
+            return curr_res
+        
+        if abs(node.val - target) < abs(curr_res - target):
+            curr_res = node.val
+        
+        if node.val < target:
+            return self.dfs(node.right, target, curr_res)
+        return self.dfs(node.left, target, curr_res)
+        
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        return self.dfs(root, target, float('inf'))
+
 # Solution 3, Iteration
 class Solution:
     def closestValue(self, root: TreeNode, target: float) -> int:

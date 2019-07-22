@@ -1,6 +1,7 @@
 import collections
 
 # Solution 1, sort
+# use sorted chars to represend anagram
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         d = collections.defaultdict(list)

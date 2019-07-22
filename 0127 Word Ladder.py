@@ -1,4 +1,6 @@
-# Double-end BFS
+import string
+
+# Solution 1, double-end BFS
 class Solution:
     def change(self, word, d):
         res = []
@@ -39,7 +41,7 @@ class Solution:
             
         return 0
 
-# Solution 2, without Seen set
+# Solution 1.1, without Seen set
 class Solution:
     def change(self, word, d):
         res = []
@@ -75,4 +77,39 @@ class Solution:
                     tmp.add(new_word)
             left, right = right, tmp
             
+        return 0
+
+# Solution 2, plain bfs
+class Solution:
+    def generate_next_words(self, curr, wordList, seen):
+        res = []
+        for word in curr:
+            for i in range(len(word)):
+                for c in string.ascii_lowercase:
+                    if c != word[i]:
+                        new_word = word[:i] + c + word[(i + 1):]
+                        if new_word in wordList and new_word not in seen:
+                            seen.add(new_word)
+                            res.append(new_word)
+        return res
+    
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordList = set(wordList)
+        
+        if endWord not in wordList:
+            return 0
+        
+        curr = [beginWord]
+        seen = set(curr)
+        steps = 1
+        
+        while curr:
+            if any(word == endWord for word in curr):
+                return steps
+            
+            tmp = self.generate_next_words(curr, wordList, seen)
+            
+            steps += 1
+            curr = tmp
+        
         return 0

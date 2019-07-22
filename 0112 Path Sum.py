@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-# Solution 1, Recursion
+# Solution 1, recursion
 class Solution:
     def dfs(self, node, target):
         if node is None:
@@ -19,7 +19,7 @@ class Solution:
     def hasPathSum(self, root: TreeNode, target: int) -> bool:
         return self.dfs(root, target)
 
-# Solution 2, Iteration
+# Solution 2, iteration
 class Solution:
     def hasPathSum(self, root: TreeNode, target: int) -> bool:
         if root is None:

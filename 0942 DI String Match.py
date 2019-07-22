@@ -1,20 +1,20 @@
-# Solution 1,
+# Solution 1, greedy
 class Solution:
-    def diStringMatch(self, S: 'str') -> 'List[int]':
+    def diStringMatch(self, S: str) -> List[int]:
         n = len(S)
-        i, j = 0, n
-        
         res = [0 for _ in range(n + 1)]
-        idx = 0
-        while idx < n:
-            if S[idx] == 'I':
-                res[idx] = i
-                i += 1
+        
+        left, right = 0, n
+        
+        for i in range(n):
+            if S[i] == 'I':
+                res[i] = left
+                left += 1
             else:
-                res[idx] = j
-                j -= 1
-            idx += 1
-        res[idx] = i
+                res[i] = right
+                right -= 1
+        res[n] = left
+        
         return res
 
 # Solution 2,

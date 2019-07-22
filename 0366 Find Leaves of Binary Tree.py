@@ -1,11 +1,11 @@
+import collections
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
-import collections
 
 # Solution 1, cache node depth, and generate output
 class Solution:
@@ -56,5 +56,29 @@ class Solution:
                     q.append(p.left)
             res.append(path)
         res.append([root.val])
+        
+        return res
+
+# Solution 2.1, recursion version
+class Solution:
+    def dfs(self, node, q):
+        if node is None:
+            return
+        if node.left is None and node.right is None:
+            q.append(node.val)
+            return
+        node.left = self.dfs(node.left, q)
+        node.right = self.dfs(node.right, q)
+        
+        return node
+        
+    def findLeaves(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        curr = root
+        
+        while curr:
+            q = []
+            curr = self.dfs(curr, q)
+            res.append(q)
         
         return res

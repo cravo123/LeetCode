@@ -1,8 +1,7 @@
-# Solution 1, plain deque
 import collections
 
+# Solution 1, plain deque
 class Logger:
-
     def __init__(self):
         """
         Initialize your data structure here.
@@ -26,9 +25,9 @@ class Logger:
         
         return True
 
-# Solution 2, this one is much more elegant, similar to hit counter
+# Solution 2, this one is much more elegant, 
+# similar to LC 0362 Design Hit Counter
 class Logger:
-
     def __init__(self):
         """
         Initialize your data structure here.
@@ -53,6 +52,34 @@ class Logger:
                 return False
         
         self.d[t].add(message)
+        
+        return True
+
+# Solution 2.1, similar idea
+class Logger:
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.size = 10
+        self.q = [[0, set()] for _ in range(self.size)]
+        
+    def shouldPrintMessage(self, timestamp: int, message: str) -> bool:
+        """
+        Returns true if the message should be printed in the given timestamp, otherwise returns false.
+        If this method returns false, the message will not be printed.
+        The timestamp is in seconds granularity.
+        """
+        for t, msgs in self.q:
+            if abs(t - timestamp) < 10 and message in msgs:
+                return False
+        
+        idx = timestamp % self.size
+        if self.q[idx][0] == timestamp:
+            self.q[idx][1].add(message)
+        else:
+            self.q[idx][0] = timestamp
+            self.q[idx][1] = set([message])
         
         return True
 

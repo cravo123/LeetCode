@@ -4,12 +4,13 @@
 # @return a boolean, whether a knows b
 # def knows(a, b):
 
+# Solution 1, simulation
 # Candidate will be the candidate celebrity.
 # As long as there is a real celebrity, candidate
 # will always be the right one. This is because once
 # candidate be celebrity index, it will never leave, similar
 # to absorbing status in Markov Chain.
-class Solution(object):
+class Solution:
     def findCelebrity(self, n):
         """
         :type n: int

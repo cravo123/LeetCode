@@ -32,7 +32,7 @@ class Solution:
         curr = root
         
         while curr:
-            next_node = runner = Node(0, None, None, None)
+            dummy = runner = Node(None, None, None, None)
             
             while curr:
                 if curr.left:
@@ -42,6 +42,6 @@ class Solution:
                     runner.next = curr.right
                     runner = runner.next
                 curr = curr.next
-            runner.next = None
-            curr = next_node.next
+            #runner.next = None
+            curr = dummy.next
         return root

@@ -1,6 +1,27 @@
 import string
 
-# Solution 1, brute-force, enumerate all possibilities
+# Solution 1, symmetry
+class Solution:
+    def generate_min(self, curr):
+        res = ''
+        res_val = float('inf')
+        
+        for c in string.hexdigits:
+            if abs(int(c + c, 16) - int(curr, 16)) < res_val:
+                res = c + c
+                res_val = abs(int(c + c, 16) - int(curr, 16))
+        return res
+        
+    def similarRGB(self, color: str) -> str:
+        res = ['#']
+        
+        for i in range(1, len(color), 2):
+            res.append(self.generate_min(color[i:(i + 2)]))
+        
+        res = ''.join(res)
+        return res
+
+# Solution 2, brute-force, enumerate all possibilities
 class Solution:
     def generate(self):
         res = []
@@ -32,24 +53,3 @@ class Solution:
                 res = kk
         return '#' + res
 
-# Solution 2, symmetry
-class Solution:
-    def generate_min(self, curr):
-        res = ''
-        res_val = float('inf')
-        
-        for c in string.hexdigits:
-            if abs(int(c + c, 16) - int(curr, 16)) < res_val:
-                res = c + c
-                res_val = abs(int(c + c, 16) - int(curr, 16))
-        return res
-        
-    def similarRGB(self, color: str) -> str:
-        
-        res = ['#']
-        
-        for i in range(1, len(color), 2):
-            res.append(self.generate_min(color[i:(i + 2)]))
-        
-        res = ''.join(res)
-        return res

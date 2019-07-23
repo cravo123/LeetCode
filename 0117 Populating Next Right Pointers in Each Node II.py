@@ -46,3 +46,26 @@ class Solution:
             #runner.next = None
             curr = dummy.next # got-cha
         return root
+
+# Solution 2.1, better implementation
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        curr = root
+        dummy = runner = Node(None, None, None, None)
+        
+        while curr:
+            runner.next = curr.left
+            if runner.next:
+                runner = runner.next
+            
+            runner.next = curr.right
+            if runner.next:
+                runner = runner.next
+            
+            curr = curr.next
+            
+            if not curr:
+                curr = dummy.next
+                runner = dummy
+        
+        return root

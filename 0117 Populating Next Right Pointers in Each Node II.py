@@ -27,6 +27,7 @@ class Solution:
         return root
 
 # Solution 2, O(1) space
+# Level-order traversal
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
         curr = root
@@ -43,5 +44,5 @@ class Solution:
                     runner = runner.next
                 curr = curr.next
             #runner.next = None
-            curr = dummy.next
+            curr = dummy.next # got-cha
         return root

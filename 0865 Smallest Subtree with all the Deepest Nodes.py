@@ -5,6 +5,9 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, recursion
+# The trick is to return two values, (depth, subtree node with deepest leaf nodes)
+# Similar to LC 0687 Longest Univalue Path
 class Solution:
     def dfs(self, node):
         if node is None:

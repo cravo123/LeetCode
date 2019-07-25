@@ -6,6 +6,10 @@ class Node:
         self.next = next
         self.random = random
 """
+
+# Solution 1, simulation
+# first create and append copied node after each node
+# then split the linked list
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
         if head is None:
@@ -34,3 +38,5 @@ class Solution:
             curr.next = curr.next.next
             curr = curr.next
         return dummy.next
+
+# Solution 2, simulation using hashmap

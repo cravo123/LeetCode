@@ -27,7 +27,7 @@ class TimeMap:
         
         return self.d[key][1][idx - 1]
 
-# Solution 2, store (timestamp, value) pair
+# Solution 1.1, store (timestamp, value) pair
 class TimeMap:
 
     def __init__(self):

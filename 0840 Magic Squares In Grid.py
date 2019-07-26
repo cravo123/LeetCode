@@ -1,37 +1,37 @@
-import collections
-
 # Solution 1, brute-force
 class Solution:
-    def check(self, i, j, grid):
-        d = collections.Counter()
+    def check(self, i, j, grid, m, n):
+        seen = set()
+        for r in range(i - 1, i + 2):
+            for c in range(j - 1, j + 2):
+                seen.add(grid[r][c])
         
-        for x in range(i, i + 3):
-            for y in range(j, j + 3):
-                c = grid[x][y]
-                d[c] += 1
-                if d[c] > 1 or not 1 <= c <= 9:
-                    return False
-        
-        g = [row[j:(j + 3)] for row in grid[i:(i + 3)]]
-        
-        if any(sum(row) != 15 for row in g) or any(sum(col) != 15 for col in zip(*g)):
+        if seen != set(range(1, 10)):
             return False
         
-        if sum(g[x][x] for x in range(3)) != 15:
+        if any(sum(grid[r][c] for c in [j - 1, j, j + 1]) != 15 for r in [i - 1, i, i + 1]):
             return False
-        if sum(g[x][2 - x] for x in range(3)) != 15:
+        
+        if any(sum(grid[r][c] for r in [i - 1, i, i + 1]) != 15 for c in [j - 1, j, j + 1]):
+            return False
+        
+        if grid[i - 1][j - 1] + grid[i][j] + grid[i + 1][j + 1] != 15:
+            return False
+
+        if grid[i - 1][j + 1] + grid[i][j] + grid[i + 1][j - 1] != 15:
             return False
         
         return True
         
     def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0]) if grid else 0
-        
         res = 0
-        for i in range(m - 2):
-            for j in range(n - 2):
-                if self.check(i, j, grid):
+        
+        for i in range(1, m - 1):
+            for j in range(1, n - 1):
+                if self.check(i, j, grid, m, n):
                     res += 1
+        
         return res
 
 # Solution 2, precache solution
@@ -94,3 +94,4 @@ class Solution:
                 if any(t == x for x in q):
                     res += 1
         return res
+

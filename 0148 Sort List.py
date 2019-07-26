@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, merge sort 
 # Merge Sort + Use fast and slow pointers to halve a linked list
 class Solution:
     def merge(self, p, q):

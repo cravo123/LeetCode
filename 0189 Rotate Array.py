@@ -1,3 +1,5 @@
+# Solution 1, simulation
+# 3-reversal
 class Solution:
     def reverse(self, nums, start, end):
         i, j = start, end

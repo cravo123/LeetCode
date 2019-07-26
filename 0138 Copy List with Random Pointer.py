@@ -15,28 +15,32 @@ class Solution:
         if head is None:
             return
         
+        # add copied node
         curr = head
-        
         while curr:
-            p = curr.next
-            curr.next = Node(curr.val, p, None)
-            curr = p
+            tmp = curr.next
+            curr.next = Node(curr.val, tmp, None)
+            curr = tmp
         
+        # update random
         curr = head
-        dummy = res = Node(0, None, None)
-        
         while curr:
             if curr.random:
                 curr.next.random = curr.random.next
             curr = curr.next.next
         
-        curr = head
-        while curr:
-            res.next = curr.next
-            res = res.next
+        # split
+        res = head.next
+        p, q = head, head.next
+        while p:
+            p.next = q.next
             
-            curr.next = curr.next.next
-            curr = curr.next
-        return dummy.next
+            if q.next:
+                q.next = q.next.next
+            
+            p = p.next
+            q = q.next
+        
+        return res
 
 # Solution 2, simulation using hashmap

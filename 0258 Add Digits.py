@@ -1,4 +1,4 @@
-# Solution 1, Iteration
+# Solution 1, iteration
 class Solution:
     def addDigits(self, num: int) -> int:
         while num >= 10:
@@ -9,7 +9,7 @@ class Solution:
             num = tmp
         return num
 
-# Solution 2, 
+# Solution 2, mathematic induction
 class Solution(object):
     def addDigits(self, num):
         """

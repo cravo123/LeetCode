@@ -1,3 +1,4 @@
+# Solution 1, simulation
 # Real solution should also consider resizing, and use linked list for each position.
 # Here we use list as an alternative.
 class MyHashMap:

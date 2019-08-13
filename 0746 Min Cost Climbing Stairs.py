@@ -1,4 +1,4 @@
-# Solution 1, O(N) space
+# Solution 1, DP, O(N) space
 class Solution:
     def minCostClimbingStairs(self, cost: 'List[int]') -> 'int':
         n = len(cost)
@@ -9,7 +9,7 @@ class Solution:
         
         return dp[-1]
 
-# Solution 2, O(1) space
+# Solution 2, DP, O(1) space
 class Solution:
     def minCostClimbingStairs(self, cost: 'List[int]') -> 'int':
         prev = curr = 0

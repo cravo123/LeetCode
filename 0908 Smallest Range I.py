@@ -1,3 +1,4 @@
+# Solution 1, simulation
 class Solution:
     def smallestRangeI(self, A: List[int], K: int) -> int:
         min_val = min(A)

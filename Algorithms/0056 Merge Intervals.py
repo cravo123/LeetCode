@@ -4,36 +4,31 @@
 #         self.start = s
 #         self.end = e
 
+from heapq import *
+
 # Solution 1, sort and merge
 class Solution:
-    def merge(self, intervals: List[Interval]) -> List[Interval]:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if not intervals:
             return []
-        intervals.sort(key=lambda x: x.start)
+        
+        intervals.sort(key=lambda x: x[0])
         
         res = []
-        curr = intervals[0]
+        left, right = intervals[0]
         
-        for i in range(1, len(intervals)):
-            if curr.end < intervals[i].start:
-                res.append(curr)
-                curr = intervals[i]
+        for x, y in intervals:
+            if right < x:
+                res.append([left, right])
+                left, right = x, y
             else:
-                curr.end = max(curr.end, intervals[i].end)
+                right = max(right, y)
         
-        res.append(curr)
+        res.append([left, right])
         
         return res
 
 # Solution 2, heapq
-# Definition for an interval.
-# class Interval:
-#     def __init__(self, s=0, e=0):
-#         self.start = s
-#         self.end = e
-
-from heapq import *
-
 class Solution:
     def merge(self, intervals: List[Interval]) -> List[Interval]:
         res = []

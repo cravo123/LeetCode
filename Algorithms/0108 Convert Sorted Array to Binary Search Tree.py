@@ -5,21 +5,20 @@
 #         self.left = None
 #         self.right = None
 
+# Solution 1, Recursion
 class Solution:
-    def dfs(self, nums, start, end):
+    def dfs(self, start, end, nums):
         if start > end:
             return 
-        if start == end:
-            return TreeNode(nums[start])
         
         mid = (start + end) // 2
         root = TreeNode(nums[mid])
-        root.left = self.dfs(nums, start, mid - 1)
-        root.right = self.dfs(nums, mid + 1, end)
+        root.left = self.dfs(start, mid - 1, nums)
+        root.right = self.dfs(mid + 1, end, nums)
         
         return root
         
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
-        res = self.dfs(nums, 0, len(nums) - 1)
+        res = self.dfs(0, len(nums) - 1, nums)
         
         return res

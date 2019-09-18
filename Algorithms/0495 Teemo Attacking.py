@@ -1,18 +1,15 @@
+# Solution 1, simulation
+# Keep track of last attack time
 class Solution:
     def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
         if not timeSeries:
             return 0
         
         res = 0
-        curr = timeSeries[0]
+        prev = timeSeries[0]
         
         for t in timeSeries[1:]:
-            if curr + duration < t:
-                res += duration
-            else:
-                res += t - curr
-            curr = t
-            
-        res += duration
+            res += min(t - prev, duration)
+            prev = t
         
-        return res
+        return res + duration

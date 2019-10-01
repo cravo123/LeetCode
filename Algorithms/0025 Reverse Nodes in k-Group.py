@@ -54,4 +54,26 @@ class Solution:
         return dummy.next
 
 # Solution 2, Recursion is easier.
-                
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        runner = head
+        cnt = 0
+        while runner and cnt < k:
+            cnt += 1
+            runner = runner.next
+        
+        if cnt == k:
+            nxt_node = self.reverseKGroup(runner, k)
+            
+            # Then reverse First k node
+            prev, curr = None, head
+            while curr is not runner:
+                tmp = curr.next
+                curr.next = prev
+                prev, curr = curr, tmp
+            
+            # append tail
+            head.next = nxt_node
+            head = prev
+        
+        return head                

@@ -4,57 +4,50 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, fast and slow pointers, reverse linked list techniques
 class Solution:
-    
-    def split(self, node):
-        prev = None
+    def cut_half(self, node):
         slow = fast = node
-        
+        prev = None
         while fast and fast.next:
+            fast = fast.next.next
             prev = slow
             slow = slow.next
-            fast = fast.next.next
         
-        if prev:
-            prev.next = None
+        # make sure to null first half tail
+        prev.next = None
         
-        return slow
-    
-    def reverse(self, node):
-        prev, curr = None, node
+        prev, curr = None, slow
         while curr:
-            p = curr.next
+            tmp = curr.next
             curr.next = prev
-            prev = curr
-            curr = p
+            prev, curr = curr, tmp
         
-        return prev
-    
+        return node, prev
+        
     def reorderList(self, head: ListNode) -> None:
         """
         Do not return anything, modify head in-place instead.
         """
-        # This special handling is important. 
-        # Otherwise for single node, it will generate
-        # circle linked list
         if head is None or head.next is None:
-            return
+            return head
         
-        mid = self.split(head)
-        h1 = head
-        h2 = self.reverse(mid)
+        # cut in half
+        p, q = self.cut_half(head)
+        
+        # paste half lists
         dummy = curr = ListNode(0)
+        while p or q:
+            if p:
+                curr.next = p
+                curr = curr.next
+                p = p.next
+            if q:
+                curr.next = q
+                curr = curr.next
+                q = q.next
         
-        while h1 and h2:
-            t1, t2 = h1.next, h2.next
-            curr.next = h1
-            h1.next = h2
-            curr = h2
-            
-            h1, h2 = t1, t2
-        
-        if h1:
-            curr.next = h1
+        return dummy.next
         
             
         

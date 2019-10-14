@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1, simulation
 class Solution:
     def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
         dummy = curr = ListNode(0)

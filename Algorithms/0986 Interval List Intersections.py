@@ -22,23 +22,26 @@ class Solution:
 
 # Solution 2, "merge-sort" like
 class Solution:
-    def intervalIntersection(self, A: List[Interval], B: List[Interval]) -> List[Interval]:
-        res = []
+    def intervalIntersection(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
+        m, n = len(A), len(B)
         i = j = 0
-        m, n = map(len, (A, B))
+        res = []
         
         while i < m and j < n:
-            if A[i].end < B[j].start:
+            if A[i][1] < B[j][0]:
                 i += 1
-            elif B[j].end < A[i].start:
+            elif A[i][0] > B[j][1]:
                 j += 1
             else:
-                res.append(Interval(max(A[i].start, B[j].start), min(A[i].end, B[j].end)))
-                if A[i].end <= B[j].end:
+                lo = max(A[i][0], B[j][0])
+                hi = min(A[i][1], B[j][1])
+                res.append([lo, hi])
+                
+                if A[i][1] <= B[j][1]:
                     i += 1
                 else:
                     j += 1
-
+        
         return res
 
 # Solution 3, more simple

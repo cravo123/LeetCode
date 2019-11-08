@@ -17,6 +17,7 @@ class Solution:
         return res
 
 # Solution 2, follow-up, if nums1 and nums2 are sorted
+# Merge-sort idea
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
         nums1.sort()

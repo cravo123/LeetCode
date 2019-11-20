@@ -5,7 +5,7 @@ class Solution:
         for x in range(9):
             seen.add(board[x][j])
         
-        i, j = i // 3 * 3, j // 3 * 3
+        i, j = i // 3 * 3, j // 3 * 3 # don't forget to multiply by 3
         
         for x in range(i, i + 3):
             for y in range(j, j + 3):

@@ -1,4 +1,5 @@
 import collections
+
 # Solution 1, use stack to record previous time-consumed
 class Solution:
     def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
